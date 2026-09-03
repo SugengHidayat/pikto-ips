@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Numerasi IPS | PIKTO-IPS</title>
+
+  <style>
+    :root {
+      --primary: #1565c0;
+      --primary-dark: #0d47a1;
+      --secondary: #ff9800;
+      --success: #2e7d32;
+      --bg: #f4f8fc;
+      --card: #ffffff;
+      --text: #263238;
+      --muted: #607d8b;
+      --border: #dbe5ee;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #e8f5e9, #fff8e1);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    .container {
+      width: min(1100px, 94%);
+      margin: auto;
+      padding: 24px 0 50px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2e7d32, #43a047);
+      color: white;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--secondary);
+      color: white;
+      padding: 6px 13px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 25px rgba(50,80,110,0.1);
+      border: 1px solid var(--border);
+    }
+
+    h2 {
+      color: #1b5e20;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      color: #2e7d32;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    .highlight {
+      background: #fff8e1;
+      border-left: 6px solid var(--secondary);
+      padding: 18px;
+      border-radius: 14px;
+      margin: 15px 0;
+    }
+
+    .info {
+      background: #e8f5e9;
+      border-left: 6px solid var(--success);
+      padding: 18px;
+      border-radius: 14px;
+      margin: 15px 0;
+    }
+
+    .example {
+      background: #e3f2fd;
+      border-radius: 14px;
+      padding: 18px;
+      margin: 15px 0;
+    }
+
+    ul {
+      margin-left: 24px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin-bottom: 7px;
+    }
+
+    .pictogram-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .pictogram-table th,
+    .pictogram-table td {
+      border: 1px solid var(--border);
+      padding: 14px;
+      text-align: left;
+    }
+
+    .pictogram-table th {
+      background: #e8f5e9;
+    }
+
+    .icons {
+      font-size: 28px;
+      letter-spacing: 5px;
+    }
+
+    .formula {
+      text-align: center;
+      font-size: 23px;
+      font-weight: bold;
+      color: #1b5e20;
+      background: #f1f8e9;
+      padding: 18px;
+      border-radius: 14px;
+      margin: 15px 0;
+    }
+
+    .step {
+      border-left: 5px solid #66bb6a;
+      background: #f9fff9;
+      margin: 12px 0;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .question-box {
+      border: 2px dashed #81c784;
+      border-radius: 16px;
+      padding: 18px;
+      margin-top: 16px;
+      background: #fbfffb;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 20px;
+    }
+
+    @media(max-width:700px){
+      .header h1{
+        font-size:27px;
+      }
+
+      .card{
+        padding:18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <header class="header">
+      <span class="badge">🔢 NUMERASI IPS</span>
+      <h1>Belajar Menggunakan Angka dalam Kehidupan</h1>
+      <p>
+        Numerasi membantu kita menggunakan angka, operasi hitung,
+        data, tabel, dan piktogram untuk memahami masalah kehidupan sehari-hari.
+      </p>
+    </header>
+
+    <section class="card">
+      <h2>🌟 Apa Itu Numerasi?</h2>
+
+      <p>
+        Numerasi adalah kemampuan memahami dan menggunakan angka
+        untuk memecahkan masalah dalam kehidupan sehari-hari.
+      </p>
+
+      <div class="highlight">
+        Numerasi bukan hanya menghitung.
+        Kita juga harus memahami arti angka dan menentukan
+        bagaimana angka tersebut digunakan untuk menjawab masalah.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🏘️ Numerasi dalam Pelajaran IPS</h2>
+
+      <p>
+        Dalam IPS, angka sering digunakan untuk memahami kehidupan masyarakat.
+      </p>
+
+      <ul>
+        <li>menghitung jumlah penduduk;</li>
+        <li>menghitung hasil pertanian;</li>
+        <li>membandingkan jumlah barang;</li>
+        <li>menghitung pendapatan dan pengeluaran;</li>
+        <li>membaca tabel dan grafik;</li>
+        <li>menghitung jarak;</li>
+        <li>menentukan barang paling banyak atau sedikit;</li>
+        <li>mengambil keputusan berdasarkan data.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>📊 Mengenal Piktogram</h2>
+
+      <p>
+        Piktogram menyajikan data dengan gambar.
+        Setiap gambar memiliki nilai tertentu.
+      </p>
+
+      <div class="formula">
+        1 🧺 = 2 keranjang
+      </div>
+
+      <table class="pictogram-table">
+        <thead>
+          <tr>
+            <th>Pedagang</th>
+            <th>Barang</th>
+            <th>Piktogram</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Bu Sari</td>
+            <td>Tomat</td>
+            <td class="icons">🧺 🧺 🧺 🧺</td>
+          </tr>
+
+          <tr>
+            <td>Pak Budi</td>
+            <td>Jagung</td>
+            <td class="icons">🧺 🧺 🧺</td>
+          </tr>
+
+          <tr>
+            <td>Pak Hasan</td>
+            <td>Cabai</td>
+            <td class="icons">🧺 🧺 🧺 🧺 🧺</td>
+          </tr>
+
+          <tr>
+            <td>Bu Rina</td>
+            <td>Singkong</td>
+            <td class="icons">🧺 🧺</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>✖️ Mengubah Gambar Menjadi Angka</h2>
+
+      <p>
+        Kita harus menghitung jumlah simbol lalu mengalikannya dengan nilai setiap simbol.
+      </p>
+
+      <div class="step">
+        Bu Sari memiliki 4 simbol 🧺.
+      </div>
+
+      <div class="step">
+        Setiap simbol bernilai 2 keranjang.
+      </div>
+
+      <div class="formula">
+        4 × 2 = 8
+      </div>
+
+      <p>
+        Jadi Bu Sari membawa <strong>8 keranjang tomat</strong>.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>➕ Menghitung Jumlah</h2>
+
+      <p>
+        Untuk mengetahui jumlah semua barang, kita menggunakan penjumlahan.
+      </p>
+
+      <div class="example">
+        Bu Sari = 8 keranjang<br>
+        Pak Budi = 6 keranjang<br>
+        Pak Hasan = 10 keranjang<br>
+        Bu Rina = 4 keranjang
+      </div>
+
+      <div class="formula">
+        8 + 6 + 10 + 4 = 28
+      </div>
+
+      <p>
+        Jadi seluruh hasil pertanian berjumlah
+        <strong>28 keranjang</strong>.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>➖ Menghitung Selisih</h2>
+
+      <p>
+        Selisih digunakan untuk mengetahui perbedaan antara dua jumlah.
+      </p>
+
+      <div class="example">
+        Cabai Pak Hasan = 10 keranjang<br>
+        Jagung Pak Budi = 6 keranjang
+      </div>
+
+      <div class="formula">
+        10 − 6 = 4
+      </div>
+
+      <p>
+        Jadi selisih jumlah cabai dan jagung adalah
+        <strong>4 keranjang</strong>.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>⚖️ Membandingkan Jumlah</h2>
+
+      <p>
+        Kita dapat menentukan data paling banyak dan paling sedikit.
+      </p>
+
+      <div class="example">
+        Tomat = 8<br>
+        Jagung = 6<br>
+        Cabai = 10<br>
+        Singkong = 4
+      </div>
+
+      <div class="info">
+        Nilai terbesar adalah 10 → Cabai.<br>
+        Nilai terkecil adalah 4 → Singkong.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🧠 Numerasi untuk Mengambil Keputusan</h2>
+
+      <p>
+        Angka dapat membantu kita mengambil keputusan.
+      </p>
+
+      <div class="question-box">
+        Misalnya, pasar membutuhkan barang yang persediaannya paling sedikit.
+        Berdasarkan data, barang tersebut adalah singkong.
+      </div>
+
+      <p style="margin-top:15px;">
+        Dengan membaca data, pengelola pasar dapat mengetahui
+        barang mana yang perlu ditambah persediaannya.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>💰 Numerasi dalam Kegiatan Ekonomi</h2>
+
+      <div class="example">
+        Bu Rina menjual 4 keranjang singkong.
+        Harga setiap keranjang adalah Rp10.000.
+      </div>
+
+      <div class="formula">
+        4 × Rp10.000 = Rp40.000
+      </div>
+
+      <p>
+        Jadi uang yang diperoleh Bu Rina adalah
+        <strong>Rp40.000</strong>.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>🛍️ Menghitung Sisa Barang</h2>
+
+      <div class="example">
+        Bu Sari membawa 8 keranjang tomat.
+        Kemudian 3 keranjang terjual.
+      </div>
+
+      <div class="formula">
+        8 − 3 = 5
+      </div>
+
+      <p>
+        Jadi tomat yang masih tersisa adalah
+        <strong>5 keranjang</strong>.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>📦 Menghitung Kebutuhan</h2>
+
+      <div class="example">
+        Sebuah warung membutuhkan 12 keranjang cabai.
+        Pak Hasan baru membawa 10 keranjang.
+      </div>
+
+      <div class="formula">
+        12 − 10 = 2
+      </div>
+
+      <p>
+        Artinya warung masih membutuhkan
+        <strong>2 keranjang cabai</strong>.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>🔄 Menghubungkan Literasi dan Numerasi</h2>
+
+      <p>
+        Literasi membantu kita memahami masalah.
+        Numerasi membantu kita menggunakan angka untuk menyelesaikan masalah tersebut.
+      </p>
+
+      <div class="highlight">
+        <strong>Literasi:</strong><br>
+        Apa yang ditanyakan?
+
+        <br><br>
+
+        <strong>Numerasi:</strong><br>
+        Operasi hitung apa yang digunakan?
+      </div>
+
+      <div class="example">
+        Contoh:<br><br>
+
+        “Pak Hasan membawa 10 keranjang cabai.
+        Pak Budi membawa 6 keranjang jagung.
+        Berapa selisihnya?”
+
+        <br><br>
+
+        Kita memahami kata <strong>selisih</strong> sebagai perbedaan,
+        sehingga menggunakan operasi pengurangan.
+
+        <br><br>
+
+        10 − 6 = 4
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🎯 Strategi Menyelesaikan Soal Numerasi</h2>
+
+      <div class="step">
+        <strong>Langkah 1:</strong><br>
+        Baca soal dengan teliti.
+      </div>
+
+      <div class="step">
+        <strong>Langkah 2:</strong><br>
+        Cari informasi penting.
+      </div>
+
+      <div class="step">
+        <strong>Langkah 3:</strong><br>
+        Tentukan apa yang ditanyakan.
+      </div>
+
+      <div class="step">
+        <strong>Langkah 4:</strong><br>
+        Pilih operasi hitung yang sesuai.
+      </div>
+
+      <div class="step">
+        <strong>Langkah 5:</strong><br>
+        Hitung dengan teliti.
+      </div>
+
+      <div class="step">
+        <strong>Langkah 6:</strong><br>
+        Periksa apakah jawaban masuk akal.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🎓 Latihan Numerasi</h2>
+
+      <div class="question-box">
+        <strong>Latihan 1</strong><br>
+        Bu Sari memiliki 4 gambar 🧺.
+        Jika 1 gambar mewakili 2 keranjang,
+        berapa jumlah tomat Bu Sari?
+      </div>
+
+      <div class="question-box">
+        <strong>Latihan 2</strong><br>
+        Pak Hasan membawa 10 keranjang cabai
+        dan Bu Rina membawa 4 keranjang singkong.
+        Berapa selisihnya?
+      </div>
+
+      <div class="question-box">
+        <strong>Latihan 3</strong><br>
+        Berapa jumlah seluruh hasil pertanian
+        dari empat pedagang?
+      </div>
+
+      <div class="question-box">
+        <strong>Latihan 4</strong><br>
+        Jika 3 keranjang dari 8 keranjang tomat terjual,
+        berapa keranjang yang masih tersisa?
+      </div>
+
+      <div class="question-box">
+        <strong>Latihan 5</strong><br>
+        Jika satu keranjang cabai dijual Rp12.000,
+        berapa uang yang diperoleh dari menjual 5 keranjang?
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🌟 Pesan Penting</h2>
+
+      <div class="info">
+        Numerasi membantu kita memahami angka dalam kehidupan nyata.
+        Dengan numerasi, kita tidak hanya menghitung,
+        tetapi juga dapat membandingkan, memperkirakan,
+        membaca data, dan mengambil keputusan.
+      </div>
+
+      <div class="btn-row">
+        <a href="literasi.html" class="btn btn-primary">
+          ⬅️ Kembali ke Literasi
+        </a>
+
+        <a href="index.html" class="btn btn-success">
+          🏠 Kembali ke Beranda
+        </a>
+      </div>
+    </section>
+
+    <div class="footer">
+      PIKTO-IPS • Numerasi IPS Sekolah Dasar
+    </div>
+
+  </div>
+
+</body>
+</html>
