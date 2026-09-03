@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Literasi IPS | PIKTO-IPS</title>
+
+  <style>
+    :root {
+      --primary: #1565c0;
+      --primary-dark: #0d47a1;
+      --secondary: #ff9800;
+      --success: #2e7d32;
+      --bg: #f4f8fc;
+      --card: #ffffff;
+      --text: #263238;
+      --muted: #607d8b;
+      --border: #dbe5ee;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #fff8e1);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    .container {
+      width: min(1100px, 94%);
+      margin: auto;
+      padding: 24px 0 50px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary), #0288d1);
+      color: white;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      max-width: 760px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--secondary);
+      color: white;
+      padding: 6px 13px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 25px rgba(50,80,110,0.1);
+      border: 1px solid var(--border);
+    }
+
+    h2 {
+      color: var(--primary-dark);
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      color: var(--primary);
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    .highlight {
+      background: #fff8e1;
+      border-left: 6px solid var(--secondary);
+      padding: 18px;
+      border-radius: 14px;
+      margin: 15px 0;
+    }
+
+    .info {
+      background: #e8f5e9;
+      border-left: 6px solid var(--success);
+      padding: 18px;
+      border-radius: 14px;
+      margin: 15px 0;
+    }
+
+    .example {
+      background: #e3f2fd;
+      border-radius: 14px;
+      padding: 18px;
+      margin: 15px 0;
+    }
+
+    ul {
+      margin-left: 24px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin-bottom: 7px;
+    }
+
+    .pictogram-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .pictogram-table th,
+    .pictogram-table td {
+      border: 1px solid var(--border);
+      padding: 14px;
+      text-align: left;
+    }
+
+    .pictogram-table th {
+      background: #e3f2fd;
+      color: var(--primary-dark);
+    }
+
+    .icons {
+      font-size: 28px;
+      letter-spacing: 5px;
+    }
+
+    .question-box {
+      border: 2px dashed #90caf9;
+      border-radius: 16px;
+      padding: 18px;
+      margin-top: 16px;
+      background: #fbfdff;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-warning {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 20px;
+    }
+
+    @media(max-width:700px){
+      .header h1{
+        font-size:27px;
+      }
+
+      .card{
+        padding:18px;
+      }
+
+      .pictogram-table{
+        font-size:14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <header class="header">
+      <span class="badge">📖 LITERASI IPS</span>
+      <h1>Belajar Memahami Informasi</h1>
+      <p>
+        Pada halaman ini kita akan belajar membaca cerita,
+        menemukan informasi penting, memahami kegiatan masyarakat,
+        membaca piktogram, dan mengambil kesimpulan dari informasi yang kita temukan.
+      </p>
+    </header>
+
+    <section class="card">
+      <h2>🌟 Apa Itu Literasi?</h2>
+
+      <p>
+        Literasi adalah kemampuan untuk membaca, memahami, menemukan informasi,
+        menghubungkan informasi, kemudian menggunakan informasi tersebut untuk
+        menjawab pertanyaan atau mengambil keputusan.
+      </p>
+
+      <div class="highlight">
+        <strong>Ingat!</strong><br>
+        Literasi bukan hanya bisa membaca tulisan. Literasi juga berarti
+        memahami arti dari tulisan, gambar, simbol, tabel, peta, grafik,
+        dan informasi yang kita lihat.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🏘️ Literasi dalam Pelajaran IPS</h2>
+
+      <p>
+        Dalam pelajaran IPS, kita mempelajari kehidupan manusia dan masyarakat.
+        Kita belajar tentang keluarga, lingkungan, kegiatan ekonomi,
+        kebutuhan manusia, pekerjaan, budaya, dan hubungan antarmanusia.
+      </p>
+
+      <h3>Contoh informasi IPS yang sering kita temui:</h3>
+
+      <ul>
+        <li>cerita kegiatan masyarakat di pasar;</li>
+        <li>data pekerjaan penduduk;</li>
+        <li>jumlah hasil pertanian;</li>
+        <li>kegiatan jual beli;</li>
+        <li>kebutuhan sehari-hari;</li>
+        <li>informasi tentang budaya daerah;</li>
+        <li>peta lingkungan;</li>
+        <li>tabel jumlah penduduk;</li>
+        <li>grafik hasil produksi;</li>
+        <li>piktogram kegiatan ekonomi.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>📚 Membaca Cerita IPS dengan Benar</h2>
+
+      <p>
+        Ketika membaca cerita IPS, jangan terburu-buru.
+        Perhatikan siapa yang diceritakan, apa yang dilakukan,
+        di mana kegiatan berlangsung, dan mengapa kegiatan itu dilakukan.
+      </p>
+
+      <div class="info">
+        Gunakan pertanyaan berikut ketika membaca:
+        <ul>
+          <li>Siapa yang terlibat?</li>
+          <li>Apa kegiatan yang dilakukan?</li>
+          <li>Di mana kegiatan berlangsung?</li>
+          <li>Kapan kegiatan dilakukan?</li>
+          <li>Mengapa kegiatan tersebut dilakukan?</li>
+          <li>Apa informasi penting dalam cerita?</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🛒 Contoh Cerita: Pasar Desa Sukamaju</h2>
+
+      <div class="example">
+        Setiap hari Minggu, masyarakat Desa Sukamaju melakukan kegiatan
+        jual beli di pasar desa. Para petani membawa hasil pertanian
+        seperti tomat, jagung, cabai, dan singkong.
+        Pedagang menjual hasil pertanian tersebut kepada masyarakat.
+        Kegiatan ini membantu petani memperoleh penghasilan dan membantu
+        masyarakat mendapatkan bahan makanan.
+      </div>
+
+      <h3>Apa informasi penting dari cerita tersebut?</h3>
+
+      <ul>
+        <li>Kegiatan terjadi di pasar desa.</li>
+        <li>Kegiatan yang dilakukan adalah jual beli.</li>
+        <li>Petani membawa hasil pertanian.</li>
+        <li>Masyarakat membeli barang yang dibutuhkan.</li>
+        <li>Petani mendapatkan penghasilan dari hasil penjualan.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>💡 Menemukan Ide Pokok</h2>
+
+      <p>
+        Ide pokok adalah gagasan utama yang dibahas dalam sebuah paragraf.
+        Untuk menemukan ide pokok, tanyakan:
+      </p>
+
+      <div class="highlight">
+        “Paragraf ini paling banyak membahas tentang apa?”
+      </div>
+
+      <div class="example">
+        <strong>Contoh:</strong><br>
+        “Setiap hari Minggu, masyarakat Desa Sukamaju melakukan
+        kegiatan jual beli di pasar desa. Para petani membawa hasil
+        pertanian untuk dijual.”
+
+        <br><br>
+
+        <strong>Ide pokok:</strong><br>
+        Kegiatan jual beli masyarakat Desa Sukamaju di pasar desa.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🔎 Menemukan Informasi Tersurat</h2>
+
+      <p>
+        Informasi tersurat adalah informasi yang tertulis langsung dalam teks.
+        Kita dapat menemukan jawabannya dengan membaca kembali isi cerita.
+      </p>
+
+      <div class="example">
+        <strong>Pertanyaan:</strong><br>
+        Di mana masyarakat Desa Sukamaju melakukan kegiatan jual beli?
+
+        <br><br>
+
+        <strong>Jawaban:</strong><br>
+        Di pasar desa.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🧠 Menemukan Informasi Tersirat</h2>
+
+      <p>
+        Informasi tersirat tidak selalu ditulis secara langsung.
+        Kita perlu memahami hubungan antar informasi dalam teks.
+      </p>
+
+      <div class="example">
+        <strong>Informasi:</strong><br>
+        Petani menjual hasil pertanian kepada masyarakat.
+
+        <br><br>
+
+        <strong>Kesimpulan:</strong><br>
+        Petani memperoleh penghasilan dari kegiatan jual beli tersebut.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>📊 Membaca Piktogram</h2>
+
+      <p>
+        Piktogram adalah penyajian data menggunakan gambar atau simbol.
+        Setiap gambar memiliki nilai tertentu.
+      </p>
+
+      <div class="highlight">
+        Jika 1 gambar 🧺 = 2 keranjang,
+        maka kita harus mengalikan jumlah gambar dengan 2.
+      </div>
+
+      <table class="pictogram-table">
+        <thead>
+          <tr>
+            <th>Pedagang</th>
+            <th>Barang</th>
+            <th>Piktogram</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Bu Sari</td>
+            <td>Tomat</td>
+            <td class="icons">🧺 🧺 🧺 🧺</td>
+          </tr>
+
+          <tr>
+            <td>Pak Budi</td>
+            <td>Jagung</td>
+            <td class="icons">🧺 🧺 🧺</td>
+          </tr>
+
+          <tr>
+            <td>Pak Hasan</td>
+            <td>Cabai</td>
+            <td class="icons">🧺 🧺 🧺 🧺 🧺</td>
+          </tr>
+
+          <tr>
+            <td>Bu Rina</td>
+            <td>Singkong</td>
+            <td class="icons">🧺 🧺</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>👀 Cara Membaca Piktogram</h2>
+
+      <p>
+        Perhatikan tiga hal utama ketika membaca piktogram:
+      </p>
+
+      <ul>
+        <li>Perhatikan judul data.</li>
+        <li>Perhatikan gambar yang digunakan.</li>
+        <li>Perhatikan keterangan atau legenda.</li>
+      </ul>
+
+      <div class="example">
+        Bu Sari memiliki 4 gambar 🧺.<br>
+        Setiap gambar mewakili 2 keranjang.<br><br>
+
+        Maka:<br>
+        <strong>4 × 2 = 8 keranjang.</strong>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🧩 Menghubungkan Cerita dan Data</h2>
+
+      <p>
+        Literasi yang baik berarti tidak hanya membaca cerita,
+        tetapi juga menghubungkan cerita dengan tabel atau piktogram.
+      </p>
+
+      <div class="question-box">
+        Jika cerita mengatakan bahwa cabai paling banyak tersedia di pasar,
+        kita harus memeriksa piktogram untuk memastikan apakah informasi tersebut benar.
+      </div>
+
+      <p style="margin-top:15px;">
+        Pada piktogram, Pak Hasan membawa cabai dengan 5 simbol.
+        Jumlah tersebut paling banyak dibandingkan pedagang lain.
+        Jadi informasi tersebut sesuai dengan data.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>🧠 Membuat Kesimpulan</h2>
+
+      <p>
+        Kesimpulan dibuat berdasarkan informasi yang telah dibaca dan dibandingkan.
+      </p>
+
+      <div class="example">
+        Berdasarkan data pasar Desa Sukamaju,
+        cabai merupakan hasil pertanian yang jumlahnya paling banyak,
+        sedangkan singkong jumlahnya paling sedikit.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🎯 Latihan Literasi</h2>
+
+      <div class="question-box">
+        <strong>Latihan 1</strong><br>
+        Apa kegiatan ekonomi yang dilakukan masyarakat Desa Sukamaju?
+      </div>
+
+      <div class="question-box">
+        <strong>Latihan 2</strong><br>
+        Siapa yang membawa hasil pertanian paling banyak?
+      </div>
+
+      <div class="question-box">
+        <strong>Latihan 3</strong><br>
+        Mengapa pasar penting bagi petani?
+      </div>
+
+      <div class="question-box">
+        <strong>Latihan 4</strong><br>
+        Apa hubungan antara petani dan pembeli dalam kegiatan pasar?
+      </div>
+
+      <div class="question-box">
+        <strong>Latihan 5</strong><br>
+        Tuliskan satu kesimpulan yang dapat kamu buat berdasarkan cerita dan piktogram.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🌱 Pesan Penting</h2>
+
+      <div class="info">
+        Murid yang memiliki kemampuan literasi yang baik
+        mampu membaca informasi, memahami isi informasi,
+        membandingkan data, dan menggunakan informasi
+        untuk memecahkan masalah dalam kehidupan sehari-hari.
+      </div>
+
+      <div class="btn-row">
+        <a href="index.html" class="btn btn-primary">
+          🏠 Kembali ke Beranda
+        </a>
+
+        <a href="numerasi.html" class="btn btn-warning">
+          ➡️ Lanjut ke Numerasi
+        </a>
+      </div>
+    </section>
+
+    <div class="footer">
+      PIKTO-IPS • Literasi IPS Sekolah Dasar
+    </div>
+
+  </div>
+
+</body>
+</html>
