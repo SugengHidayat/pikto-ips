@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>PIKTO-IPS | Literasi dan Numerasi SD</title>
+
+  <style>
+    :root {
+      --primary: #1565c0;
+      --primary-dark: #0d47a1;
+      --secondary: #ff9800;
+      --success: #2e7d32;
+      --danger: #d32f2f;
+      --warning: #f9a825;
+      --bg: #f4f8fc;
+      --card: #ffffff;
+      --text: #263238;
+      --muted: #607d8b;
+      --border: #dbe5ee;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(
+        135deg,
+        #e3f2fd,
+        #fff8e1
+      );
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(1100px, 94%);
+      margin: auto;
+      padding: 24px 0 50px;
+    }
+
+    .header {
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        #0288d1
+      );
+      color: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::after {
+      content: "📊";
+      position: absolute;
+      right: 25px;
+      top: 8px;
+      font-size: 100px;
+      opacity: 0.15;
+    }
+
+    .header h1 {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 700px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--secondary);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 25px rgba(50, 80, 110, 0.1);
+      border: 1px solid var(--border);
+    }
+
+    .card h2 {
+      color: var(--primary-dark);
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #cfd8dc;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.12);
+    }
+
+    .story-box {
+      padding: 20px;
+      background: #fff8e1;
+      border-left: 6px solid var(--secondary);
+      border-radius: 14px;
+      line-height: 1.8;
+      margin-top: 12px;
+    }
+
+    .story-title {
+      font-size: 19px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #ef6c00;
+    }
+
+    .pictogram-wrapper {
+      overflow-x: auto;
+    }
+
+    .pictogram-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      min-width: 650px;
+    }
+
+    .pictogram-table th,
+    .pictogram-table td {
+      border-bottom: 1px solid var(--border);
+      padding: 15px;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    .pictogram-table th {
+      background: #e3f2fd;
+      color: var(--primary-dark);
+    }
+
+    .icons {
+      font-size: 28px;
+      letter-spacing: 5px;
+      line-height: 1.7;
+    }
+
+    .legend {
+      margin-top: 16px;
+      background: #e8f5e9;
+      border-radius: 12px;
+      padding: 14px;
+      color: #1b5e20;
+      font-weight: bold;
+    }
+
+    .question {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 18px;
+      transition: 0.3s;
+    }
+
+    .question:hover {
+      border-color: #90caf9;
+      box-shadow: 0 5px 16px rgba(33, 150, 243, 0.08);
+    }
+
+    .question-number {
+      color: var(--secondary);
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .question-text {
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .option {
+      display: block;
+      border: 2px solid #eceff1;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 9px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      border-color: #90caf9;
+      background: #f5fbff;
+    }
+
+    .option input {
+      width: auto;
+      margin-right: 8px;
+    }
+
+    .progress-wrapper {
+      margin-bottom: 22px;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 7px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .progress-track {
+      height: 15px;
+      background: #e0e0e0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(
+        90deg,
+        var(--secondary),
+        #ffca28
+      );
+      transition: width 0.3s;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 13px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+
+    .btn-warning {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .btn-light {
+      background: #eceff1;
+      color: var(--text);
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .feedback.correct {
+      display: block;
+      background: #e8f5e9;
+      color: #1b5e20;
+    }
+
+    .feedback.wrong {
+      display: block;
+      background: #ffebee;
+      color: #b71c1c;
+    }
+
+    .result {
+      display: none;
+      text-align: center;
+    }
+
+    .score-circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        #29b6f6
+      );
+      color: white;
+      font-size: 36px;
+      font-weight: bold;
+      box-shadow: 0 10px 30px rgba(21, 101, 192, 0.25);
+    }
+
+    .reflection {
+      text-align: left;
+      background: #f5f5f5;
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 20px;
+      line-height: 1.7;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      padding-top: 10px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 700px) {
+      .intro-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 27px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .icons {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <header class="header">
+      <span class="badge">
+        IPS • Literasi • Numerasi
+      </span>
+
+      <h1>📊 PIKTO-IPS</h1>
+
+      <p>
+        Belajar memahami kehidupan masyarakat melalui cerita,
+        data, piktogram, perhitungan, dan pengambilan keputusan.
+      </p>
+    </header>
+
+    <!-- IDENTITAS -->
+    <section class="card" id="identitasCard">
+
+      <h2>👦 Identitas Murid</h2>
+
+      <div class="intro-grid">
+
+        <div>
+          <label for="nama">
+            Nama Lengkap
+          </label>
+
+          <input
+            id="nama"
+            type="text"
+            placeholder="Tuliskan nama..."
+          />
+        </div>
+
+        <div>
+          <label for="kelas">
+            Kelas
+          </label>
+
+          <select id="kelas">
+            <option value="">
+              Pilih kelas
+            </option>
+            <option>Kelas 4A</option>
+            <option>Kelas 4B</option>
+            <option>Kelas 4C</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="button-row">
+        <button
+          class="btn btn-primary"
+          onclick="mulaiBelajar()"
+        >
+          Mulai Belajar
+        </button>
+      </div>
+
+    </section>
+
+    <!-- AREA BELAJAR -->
+    <main id="areaBelajar" class="hidden">
+
+      <!-- PROGRESS -->
+      <section class="card">
+
+        <div class="progress-wrapper">
+
+          <div class="progress-info">
+            <span>Progres Belajar</span>
+            <span id="progressText">
+              0 dari 5 soal
+            </span>
+          </div>
+
+          <div class="progress-track">
+            <div
+              class="progress-bar"
+              id="progressBar"
+            ></div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- CERITA -->
+      <section class="card">
+
+        <h2>
+          📖 Cerita IPS
+        </h2>
+
+        <div class="story-box">
+
+          <div class="story-title">
+            Pasar Desa Sukamaju
+          </div>
+
+          <p>
+            Setiap hari Minggu, masyarakat Desa Sukamaju
+            melakukan kegiatan jual beli di pasar desa.
+            Para petani membawa hasil kebun untuk dijual.
+          </p>
+
+          <br />
+
+          <p>
+            Bu Sari, Pak Budi, Pak Hasan, dan Bu Rina
+            membawa beberapa jenis hasil pertanian.
+            Pengurus pasar mencatat jumlah barang yang
+            dibawa pedagang menggunakan piktogram.
+          </p>
+
+          <br />
+
+          <p>
+            Data tersebut digunakan untuk mengetahui
+            barang yang paling banyak tersedia dan
+            membantu masyarakat menentukan kebutuhan
+            yang akan dibeli.
+          </p>
+
+        </div>
+
+      </section>
+
+      <!-- PIKTOGRAM -->
+      <section class="card">
+
+        <h2>
+          📊 Amati Piktogram
+        </h2>
+
+        <p>
+          Perhatikan data hasil pertanian berikut.
+        </p>
+
+        <div class="legend">
+          Keterangan:
+          1 gambar 🧺 mewakili
+          <strong>2 keranjang hasil pertanian</strong>.
+        </div>
+
+        <div class="pictogram-wrapper">
+
+          <table class="pictogram-table">
+
+            <thead>
+              <tr>
+                <th>Pedagang</th>
+                <th>Barang</th>
+                <th>Piktogram</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Bu Sari</td>
+                <td>Tomat</td>
+                <td class="icons">
+                  🧺 🧺 🧺 🧺
+                </td>
+              </tr>
+
+              <tr>
+                <td>Pak Budi</td>
+                <td>Jagung</td>
+                <td class="icons">
+                  🧺 🧺 🧺
+                </td>
+              </tr>
+
+              <tr>
+                <td>Pak Hasan</td>
+                <td>Cabai</td>
+                <td class="icons">
+                  🧺 🧺 🧺 🧺 🧺
+                </td>
+              </tr>
+
+              <tr>
+                <td>Bu Rina</td>
+                <td>Singkong</td>
+                <td class="icons">
+                  🧺 🧺
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+      <!-- SOAL -->
+      <section class="card">
+
+        <h2>
+          🧠 Tantangan Literasi dan Numerasi
+        </h2>
+
+        <!-- SOAL 1 -->
+        <div class="question">
+
+          <div class="question-number">
+            SOAL 1 • Membaca Data
+          </div>
+
+          <div class="question-text">
+            Berapa keranjang tomat yang dibawa
+            Bu Sari?
+          </div>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q1"
+              value="4"
+              onchange="updateProgress()"
+            />
+            4 keranjang
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q1"
+              value="6"
+              onchange="updateProgress()"
+            />
+            6 keranjang
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q1"
+              value="8"
+              onchange="updateProgress()"
+            />
+            8 keranjang
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q1"
+              value="10"
+              onchange="updateProgress()"
+            />
+            10 keranjang
+          </label>
+
+          <div
+            id="feedback1"
+            class="feedback"
+          ></div>
+
+        </div>
+
+        <!-- SOAL 2 -->
+        <div class="question">
+
+          <div class="question-number">
+            SOAL 2 • Membandingkan
+          </div>
+
+          <div class="question-text">
+            Siapa yang membawa hasil pertanian
+            paling banyak?
+          </div>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q2"
+              value="Bu Sari"
+              onchange="updateProgress()"
+            />
+            Bu Sari
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q2"
+              value="Pak Budi"
+              onchange="updateProgress()"
+            />
+            Pak Budi
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q2"
+              value="Pak Hasan"
+              onchange="updateProgress()"
+            />
+            Pak Hasan
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q2"
+              value="Bu Rina"
+              onchange="updateProgress()"
+            />
+            Bu Rina
+          </label>
+
+          <div
+            id="feedback2"
+            class="feedback"
+          ></div>
+
+        </div>
+
+        <!-- SOAL 3 -->
+        <div class="question">
+
+          <div class="question-number">
+            SOAL 3 • Menghitung Selisih
+          </div>
+
+          <div class="question-text">
+            Berapa selisih jumlah keranjang cabai
+            Pak Hasan dan jagung Pak Budi?
+          </div>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q3"
+              value="2"
+              onchange="updateProgress()"
+            />
+            2 keranjang
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q3"
+              value="4"
+              onchange="updateProgress()"
+            />
+            4 keranjang
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q3"
+              value="6"
+              onchange="updateProgress()"
+            />
+            6 keranjang
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q3"
+              value="8"
+              onchange="updateProgress()"
+            />
+            8 keranjang
+          </label>
+
+          <div
+            id="feedback3"
+            class="feedback"
+          ></div>
+
+        </div>
+
+        <!-- SOAL 4 -->
+        <div class="question">
+
+          <div class="question-number">
+            SOAL 4 • Total Data
+          </div>
+
+          <div class="question-text">
+            Berapa jumlah seluruh keranjang hasil
+            pertanian yang dibawa ke pasar?
+          </div>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q4"
+              value="24"
+              onchange="updateProgress()"
+            />
+            24 keranjang
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q4"
+              value="26"
+              onchange="updateProgress()"
+            />
+            26 keranjang
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q4"
+              value="28"
+              onchange="updateProgress()"
+            />
+            28 keranjang
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q4"
+              value="30"
+              onchange="updateProgress()"
+            />
+            30 keranjang
+          </label>
+
+          <div
+            id="feedback4"
+            class="feedback"
+          ></div>
+
+        </div>
+
+        <!-- SOAL 5 -->
+        <div class="question">
+
+          <div class="question-number">
+            SOAL 5 • Literasi IPS
+          </div>
+
+          <div class="question-text">
+            Berdasarkan data tersebut, jika masyarakat
+            ingin membeli hasil pertanian yang jumlahnya
+            paling sedikit, barang apa yang harus dipilih?
+          </div>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q5"
+              value="Tomat"
+              onchange="updateProgress()"
+            />
+            Tomat
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q5"
+              value="Jagung"
+              onchange="updateProgress()"
+            />
+            Jagung
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q5"
+              value="Cabai"
+              onchange="updateProgress()"
+            />
+            Cabai
+          </label>
+
+          <label class="option">
+            <input
+              type="radio"
+              name="q5"
+              value="Singkong"
+              onchange="updateProgress()"
+            />
+            Singkong
+          </label>
+
+          <div
+            id="feedback5"
+            class="feedback"
+          ></div>
+
+        </div>
+
+        <div class="button-row">
+
+          <button
+            class="btn btn-success"
+            onclick="periksaJawaban()"
+          >
+            ✅ Periksa Jawaban
+          </button>
+
+          <button
+            class="btn btn-light"
+            onclick="resetJawaban()"
+          >
+            🔄 Ulangi
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- HASIL -->
+      <section
+        class="card result"
+        id="hasil"
+      >
+
+        <h2>
+          🏆 Hasil Belajar
+        </h2>
+
+        <p id="hasilNama"></p>
+
+        <div
+          class="score-circle"
+          id="scoreCircle"
+        >
+          0
+        </div>
+
+        <h3 id="predikat"></h3>
+
+        <p id="pesanHasil"></p>
+
+        <div class="reflection">
+
+          <strong>
+            💡 Refleksi IPS
+          </strong>
+
+          <p style="margin-top:10px;">
+            Piktogram membantu kita menyajikan
+            informasi dalam bentuk gambar.
+            Data tersebut dapat digunakan untuk
+            mengetahui jumlah barang, membandingkan
+            hasil produksi, dan mengambil keputusan
+            dalam kegiatan ekonomi masyarakat.
+          </p>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      PIKTO-IPS • Media Pembelajaran Literasi dan Numerasi
+      Sekolah Dasar
+    </footer>
+
+  </div>
+
+  <script>
+
+    const kunciJawaban = {
+      q1: "8",
+      q2: "Pak Hasan",
+      q3: "4",
+      q4: "28",
+      q5: "Singkong"
+    };
+
+    const pembahasan = {
+
+      q1:
+        "Ada 4 gambar keranjang. Setiap gambar mewakili 2 keranjang. Jadi 4 × 2 = 8 keranjang.",
+
+      q2:
+        "Pak Hasan memiliki 5 gambar keranjang atau 10 keranjang. Jumlah tersebut paling banyak.",
+
+      q3:
+        "Pak Hasan membawa 10 keranjang, sedangkan Pak Budi membawa 6 keranjang. Selisihnya 10 − 6 = 4.",
+
+      q4:
+        "Total seluruh hasil pertanian adalah 8 + 6 + 10 + 4 = 28 keranjang.",
+
+      q5:
+        "Bu Rina membawa singkong sebanyak 4 keranjang. Jumlah tersebut paling sedikit."
+
+    };
+
+
+    function mulaiBelajar() {
+
+      const nama =
+        document.getElementById("nama").value.trim();
+
+      const kelas =
+        document.getElementById("kelas").value;
+
+      if (!nama) {
+
+        alert(
+          "Silakan tuliskan nama terlebih dahulu."
+        );
+
+        return;
+      }
+
+      if (!kelas) {
+
+        alert(
+          "Silakan pilih kelas terlebih dahulu."
+        );
+
+        return;
+      }
+
+      localStorage.setItem(
+        "pikto_nama",
+        nama
+      );
+
+      localStorage.setItem(
+        "pikto_kelas",
+        kelas
+      );
+
+      document
+        .getElementById("areaBelajar")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("areaBelajar")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+    }
+
+
+    function updateProgress() {
+
+      let terjawab = 0;
+
+      for (let i = 1; i <= 5; i++) {
+
+        const jawaban =
+          document.querySelector(
+            'input[name="q' +
+            i +
+            '"]:checked'
+          );
+
+        if (jawaban) {
+          terjawab++;
+        }
+
+      }
+
+      const persen =
+        (terjawab / 5) * 100;
+
+      document
+        .getElementById("progressBar")
+        .style.width =
+        persen + "%";
+
+      document
+        .getElementById("progressText")
+        .textContent =
+        terjawab + " dari 5 soal";
+
+    }
+
+
+    function periksaJawaban() {
+
+      let benar = 0;
+
+      let semuaTerjawab = true;
+
+      for (let i = 1; i <= 5; i++) {
+
+        const namaSoal =
+          "q" + i;
+
+        const jawaban =
+          document.querySelector(
+            'input[name="' +
+            namaSoal +
+            '"]:checked'
+          );
+
+        const feedback =
+          document.getElementById(
+            "feedback" + i
+          );
+
+        if (!jawaban) {
+
+          semuaTerjawab = false;
+
+          feedback.className =
+            "feedback wrong";
+
+          feedback.innerHTML =
+            "⚠️ Soal ini belum dijawab.";
+
+          continue;
+        }
+
+        if (
+          jawaban.value ===
+          kunciJawaban[namaSoal]
+        ) {
+
+          benar++;
+
+          feedback.className =
+            "feedback correct";
+
+          feedback.innerHTML =
+            "✅ Benar. " +
+            pembahasan[namaSoal];
+
+        } else {
+
+          feedback.className =
+            "feedback wrong";
+
+          feedback.innerHTML =
+            "❌ Belum tepat. " +
+            pembahasan[namaSoal];
+
+        }
+
+      }
+
+      if (!semuaTerjawab) {
+
+        alert(
+          "Masih ada soal yang belum dijawab."
+        );
+
+        return;
+      }
+
+      const nilai =
+        benar * 20;
+
+      tampilkanHasil(
+        nilai,
+        benar
+      );
+
+    }
+
+
+    function tampilkanHasil(
+      nilai,
+      benar
+    ) {
+
+      const nama =
+        localStorage.getItem(
+          "pikto_nama"
+        ) || "Murid";
+
+      const kelas =
+        localStorage.getItem(
+          "pikto_kelas"
+        ) || "";
+
+      document
+        .getElementById("hasilNama")
+        .textContent =
+        nama +
+        " • " +
+        kelas +
+        " • " +
+        benar +
+        " dari 5 soal benar";
+
+      document
+        .getElementById("scoreCircle")
+        .textContent =
+        nilai;
+
+      let predikat = "";
+      let pesan = "";
+
+      if (nilai === 100) {
+
+        predikat =
+          "🌟 Luar Biasa!";
+
+        pesan =
+          "Kamu mampu membaca, menghitung, membandingkan, dan menafsirkan data piktogram dengan sangat baik.";
+
+      } else if (nilai >= 80) {
+
+        predikat =
+          "👏 Sangat Baik";
+
+        pesan =
+          "Kemampuan literasi dan numerasimu sudah sangat baik. Perhatikan kembali soal yang belum tepat.";
+
+      } else if (nilai >= 60) {
+
+        predikat =
+          "👍 Terus Berkembang";
+
+        pesan =
+          "Kamu sudah memahami sebagian besar informasi. Coba pelajari kembali hubungan gambar dan nilai pada legenda.";
+
+      } else {
+
+        predikat =
+          "💪 Ayo Berlatih Lagi";
+
+        pesan =
+          "Pelajari kembali piktogram, terutama cara mengubah jumlah gambar menjadi jumlah sebenarnya.";
+
+      }
+
+      document
+        .getElementById("predikat")
+        .textContent =
+        predikat;
+
+      document
+        .getElementById("pesanHasil")
+        .textContent =
+        pesan;
+
+      const hasil =
+        document.getElementById("hasil");
+
+      hasil.style.display =
+        "block";
+
+      const dataHasil = {
+
+        nama: nama,
+        kelas: kelas,
+        nilai: nilai,
+        benar: benar,
+        waktu:
+          new Date().toISOString()
+
+      };
+
+      localStorage.setItem(
+        "pikto_hasil",
+        JSON.stringify(
+          dataHasil
+        )
+      );
+
+      hasil.scrollIntoView({
+        behavior: "smooth"
+      });
+
+    }
+
+
+    function resetJawaban() {
+
+      const radio =
+        document.querySelectorAll(
+          'input[type="radio"]'
+        );
+
+      radio.forEach(
+        item => {
+          item.checked = false;
+        }
+      );
+
+      for (let i = 1; i <= 5; i++) {
+
+        const feedback =
+          document.getElementById(
+            "feedback" + i
+          );
+
+        feedback.className =
+          "feedback";
+
+        feedback.innerHTML = "";
+
+      }
+
+      document
+        .getElementById("progressBar")
+        .style.width =
+        "0%";
+
+      document
+        .getElementById("progressText")
+        .textContent =
+        "0 dari 5 soal";
+
+      document
+        .getElementById("hasil")
+        .style.display =
+        "none";
+
+      localStorage.removeItem(
+        "pikto_hasil"
+      );
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    window.addEventListener(
+      "load",
+      function () {
+
+        const nama =
+          localStorage.getItem(
+            "pikto_nama"
+          );
+
+        const kelas =
+          localStorage.getItem(
+            "pikto_kelas"
+          );
+
+        if (nama) {
+
+          document
+            .getElementById("nama")
+            .value =
+            nama;
+
+        }
+
+        if (kelas) {
+
+          document
+            .getElementById("kelas")
+            .value =
+            kelas;
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
