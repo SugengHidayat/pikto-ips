@@ -252,9 +252,10 @@
     /* ===================== MAIN DASHBOARD ===================== */
     .dashboard-grid{
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:28px;
+      grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr) minmax(300px,.62fr);
+      gap:22px;
       margin-top:24px;
+      align-items:start;
     }
     .panel{
       background:rgba(255,255,255,.94);
@@ -353,6 +354,147 @@
     .detail-progress{
       margin-top:18px;text-align:center;padding:11px;border-radius:10px;
       background:#f1fbf3;border:1px solid #cdebd5;color:#118536;font-weight:900;
+    }
+
+
+    /* ===================== LEADERBOARD ===================== */
+    .leaderboard-panel{
+      position:sticky;
+      top:18px;
+      padding:20px 16px 16px;
+      background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%);
+      overflow:hidden;
+    }
+    .leaderboard-panel::before{
+      content:"";
+      position:absolute;
+      top:0;left:0;right:0;height:6px;
+      background:linear-gradient(90deg,#ffc107,#ff8f00,#7e57c2);
+    }
+    .leaderboard-head{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:4px 4px 14px;
+      border-bottom:1px solid #e5edf4;
+      margin-bottom:12px;
+    }
+    .leaderboard-trophy{
+      width:52px;height:52px;border-radius:16px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:29px;
+      background:linear-gradient(145deg,#fff6c7,#ffd54f);
+      box-shadow:0 6px 14px rgba(255,193,7,.25);
+      flex-shrink:0;
+    }
+    .leaderboard-head h2{
+      font-size:20px;
+      color:#0b4e9d;
+      margin-bottom:2px;
+    }
+    .leaderboard-head p{
+      color:#687a8f;
+      font-size:11px;
+      line-height:1.4;
+    }
+    .leaderboard-list{
+      display:flex;
+      flex-direction:column;
+      gap:9px;
+      max-height:630px;
+      overflow:auto;
+      padding:2px 3px 3px;
+      scrollbar-width:thin;
+    }
+    .leader-row{
+      display:grid;
+      grid-template-columns:34px 1fr auto;
+      gap:9px;
+      align-items:center;
+      padding:10px 9px;
+      border:1px solid #e1eaf1;
+      border-radius:13px;
+      background:#fff;
+      transition:.2s ease;
+    }
+    .leader-row:hover{
+      transform:translateY(-1px);
+      border-color:#bdd6eb;
+      box-shadow:0 6px 14px rgba(35,69,104,.08);
+    }
+    .leader-row.me{
+      border-color:#67b7ff;
+      background:#eef8ff;
+      box-shadow:0 0 0 2px rgba(13,110,253,.06);
+    }
+    .rank-medal{
+      width:32px;height:32px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:14px;font-weight:900;
+      background:#edf2f6;color:#38536d;
+    }
+    .rank-1{background:linear-gradient(145deg,#fff1a8,#ffc107);color:#7a5200}
+    .rank-2{background:linear-gradient(145deg,#f8fbfd,#cfd8dc);color:#43515b}
+    .rank-3{background:linear-gradient(145deg,#ffe0bf,#cd7f32);color:#70421d}
+    .leader-main{min-width:0}
+    .leader-name{
+      display:block;
+      color:#17345b;
+      font-size:13px;
+      font-weight:900;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .leader-meta{
+      display:flex;
+      gap:5px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top:4px;
+      color:#6a7c90;
+      font-size:10px;
+    }
+    .mini-level{
+      padding:2px 6px;
+      border-radius:999px;
+      font-weight:900;
+      background:#edf5ff;
+      color:#0b61c3;
+    }
+    .leader-score{
+      text-align:right;
+      min-width:48px;
+    }
+    .leader-score strong{
+      display:block;
+      color:#128a3a;
+      font-size:18px;
+      line-height:1;
+    }
+    .leader-score small{
+      display:block;
+      color:#718195;
+      font-size:9px;
+      margin-top:4px;
+      white-space:nowrap;
+    }
+    .leaderboard-empty{
+      text-align:center;
+      padding:30px 10px;
+      color:#718195;
+      font-size:13px;
+      line-height:1.6;
+    }
+    .leaderboard-note{
+      margin-top:12px;
+      padding:9px 10px;
+      border-radius:10px;
+      background:#fff8e1;
+      color:#805b00;
+      font-size:10px;
+      line-height:1.45;
+      border:1px solid #ffecb3;
     }
 
     .info-strip{
@@ -466,7 +608,17 @@
       .brand-title{font-size:29px}
       .nav-link{min-width:105px}
       .top-logo{width:170px}
-      .dashboard-grid{grid-template-columns:1fr}
+      .dashboard-grid{grid-template-columns:1fr 1fr}
+      .leaderboard-panel{
+        grid-column:1/-1;
+        position:relative;
+        top:auto;
+      }
+      .leaderboard-list{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        max-height:none;
+      }
     }
     @media(max-width:860px){
       .topbar{height:auto;min-height:100px;flex-wrap:wrap;padding:12px 20px}
@@ -491,7 +643,9 @@
       .profile-panel{grid-template-columns:54px 1fr;padding:16px}
       .profile-data{grid-template-columns:1fr}
       .profile-field.id{grid-column:auto}
-      .dashboard-grid{gap:18px}
+      .dashboard-grid{grid-template-columns:1fr;gap:18px}
+      .leaderboard-panel{grid-column:auto}
+      .leaderboard-list{display:flex;max-height:520px}
       .panel{padding:17px}
       .level-grid{grid-template-columns:1fr}
       .form-grid{grid-template-columns:1fr}
@@ -688,6 +842,28 @@
 
           <div class="detail-progress">📊 Lihat Detail Progres</div>
         </section>
+
+        <!-- PAPAN PERINGKAT -->
+        <aside class="panel leaderboard-panel" id="leaderboard">
+          <div class="leaderboard-head">
+            <div class="leaderboard-trophy">🏆</div>
+            <div>
+              <h2>Papan Peringkat</h2>
+              <p>Nilai terbaik diprioritaskan, lalu waktu tercepat.</p>
+            </div>
+          </div>
+
+          <div class="leaderboard-list" id="leaderboardList">
+            <div class="leaderboard-empty">
+              <div class="spinner"></div>
+              Memuat hasil tantangan...
+            </div>
+          </div>
+
+          <div class="leaderboard-note">
+            ⭐ Setiap murid hanya ditampilkan satu kali berdasarkan hasil terbaiknya.
+          </div>
+        </aside>
       </div>
 
       <div class="info-strip">
@@ -788,6 +964,7 @@ let currentAnswers = {};
 let currentSessionId = '';
 let currentStartTime = '';
 let progressData = null;
+let leaderboardData = [];
 
 /* ============================================================
    LOCAL STORAGE KEYS
@@ -863,6 +1040,7 @@ async function masukAplikasi(){
       cacheProgress(progressData);
       renderProgress();
       await syncQueue();
+      await loadLeaderboard();
 
     }catch(err){
       loadProgressCache();
@@ -1350,6 +1528,7 @@ async function selesaikanLevel(){
 
     tampilkanFeedback(res.feedback || []);
     tampilkanHasil(res);
+    await loadLeaderboard();
 
     // Jika level selesai, session lama ditutup.
     localStorage.removeItem(sessionKey(currentLevel));
@@ -1457,6 +1636,59 @@ function renderProgress(){
   renderProgressItem('Awal',p.awal);
   renderProgressItem('Cakap',p.cakap);
   renderProgressItem('Mahir',p.mahir);
+  updateDashboardLocks(p);
+}
+
+function updateDashboardLocks(p){
+  const cakapOpen =
+    p.awal.status === 'LULUS' &&
+    Number(p.awal.nilai || 0) >= KKM;
+
+  const mahirOpen =
+    p.cakap.status === 'LULUS' &&
+    Number(p.cakap.nilai || 0) >= KKM;
+
+  setPreviewAvailability('previewCakap','lockCakap',cakapOpen);
+  setPreviewAvailability('previewMahir','lockMahir',mahirOpen);
+
+  updateRing('ringAwal',p.awal,p.level_aktif === 'AWAL',p);
+  updateRing('ringCakap',p.cakap,p.level_aktif === 'CAKAP',p);
+  updateRing('ringMahir',p.mahir,p.level_aktif === 'MAHIR',p);
+}
+
+function setPreviewAvailability(labelId,lockId,open){
+  const label = document.getElementById(labelId);
+  const lock = document.getElementById(lockId);
+
+  if(label){
+    label.textContent = open ? 'TERSEDIA' : 'TERKUNCI';
+    label.className = 'availability ' + (open ? 'available' : 'locked');
+  }
+
+  if(lock){
+    lock.style.display = open ? 'none' : 'flex';
+  }
+}
+
+function updateRing(id,data,isActive,p){
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  if(data && data.status === 'LULUS'){
+    el.textContent = '5/5';
+    el.classList.add('active');
+    return;
+  }
+
+  if(isActive){
+    const total = Number(p.total_soal || 5);
+    const answered = Math.min(Number(p.jumlah_terjawab || 0),total);
+    el.textContent = answered + '/' + total;
+    el.classList.add('active');
+  }else{
+    el.textContent = '0/5';
+    el.classList.remove('active');
+  }
 }
 
 function renderProgressItem(label,data){
@@ -1482,6 +1714,111 @@ function statusClass(status){
   if(s === 'PROSES') return 'st-proses';
   if(s === 'TERKUNCI') return 'st-terkunci';
   return 'st-belum';
+}
+
+/* ============================================================
+   LEADERBOARD
+============================================================ */
+
+async function loadLeaderboard(){
+  const list = document.getElementById('leaderboardList');
+  if(!list) return;
+
+  if(!apiConfigured() || !navigator.onLine){
+    renderLeaderboard([]);
+    return;
+  }
+
+  try{
+    const res = await api({
+      action:'getLeaderboard',
+      limit:10
+    });
+
+    if(!res.success){
+      throw new Error(res.message || 'Gagal mengambil papan peringkat.');
+    }
+
+    leaderboardData = Array.isArray(res.leaderboard) ? res.leaderboard : [];
+    renderLeaderboard(leaderboardData);
+  }catch(err){
+    list.innerHTML = `
+      <div class="leaderboard-empty">
+        Papan peringkat belum dapat dimuat.<br>
+        <small>${escapeHtml(err.message || '')}</small>
+      </div>
+    `;
+  }
+}
+
+function renderLeaderboard(rows){
+  const list = document.getElementById('leaderboardList');
+  if(!list) return;
+
+  if(!rows || !rows.length){
+    list.innerHTML = `
+      <div class="leaderboard-empty">
+        🏁 Belum ada hasil tantangan.<br>
+        Jadilah murid pertama yang masuk papan peringkat!
+      </div>
+    `;
+    return;
+  }
+
+  const myId = localStorage.getItem(LS.ID) || '';
+
+  list.innerHTML = rows.map((item,index)=>{
+    const rank = Number(item.peringkat || (index + 1));
+    const rankClass =
+      rank === 1 ? 'rank-1' :
+      rank === 2 ? 'rank-2' :
+      rank === 3 ? 'rank-3' : '';
+
+    const medal =
+      rank === 1 ? '🥇' :
+      rank === 2 ? '🥈' :
+      rank === 3 ? '🥉' : rank;
+
+    const isMe = myId && String(item.id_murid || '') === myId;
+
+    return `
+      <div class="leader-row ${isMe ? 'me' : ''}">
+        <div class="rank-medal ${rankClass}">${medal}</div>
+
+        <div class="leader-main">
+          <span class="leader-name">
+            ${escapeHtml(item.nama || 'Murid')} ${isMe ? '⭐' : ''}
+          </span>
+          <div class="leader-meta">
+            <span>${escapeHtml(item.kelas || '-')}</span>
+            <span>•</span>
+            <span class="mini-level">${escapeHtml(item.level || 'AWAL')}</span>
+            <span>•</span>
+            <span>⏱ ${escapeHtml(formatDuration(item.durasi_detik))}</span>
+          </div>
+        </div>
+
+        <div class="leader-score">
+          <strong>${Number(item.nilai || 0)}</strong>
+          <small>nilai</small>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function formatDuration(seconds){
+  const total = Math.max(0,Number(seconds || 0));
+  const minutes = Math.floor(total / 60);
+  const secs = total % 60;
+
+  if(minutes >= 60){
+    const hours = Math.floor(minutes / 60);
+    const remainMinutes = minutes % 60;
+    return hours + 'j ' + remainMinutes + 'm';
+  }
+
+  return minutes + 'm ' + String(secs).padStart(2,'0') + 'd';
 }
 
 function defaultProgress(){
@@ -1590,6 +1927,7 @@ window.addEventListener('online',async()=>{
         cacheProgress(progressData);
         renderProgress();
       }
+      await loadLeaderboard();
     }catch(err){}
   }
 });
@@ -1651,6 +1989,7 @@ window.addEventListener('load',async()=>{
 
     tampilkanProfil();
     renderProgress();
+    renderLeaderboard([]);
 
     if(apiConfigured() && navigator.onLine){
       try{
@@ -1666,6 +2005,7 @@ window.addEventListener('load',async()=>{
           cacheProgress(progressData);
           renderProgress();
         }
+        await loadLeaderboard();
       }catch(err){}
     }
   }
