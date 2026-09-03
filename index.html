@@ -7,803 +7,770 @@
 
   <style>
     :root{
-      --primary:#1565c0;
-      --primary-dark:#0d47a1;
-      --primary-soft:#e3f2fd;
-      --orange:#ff9800;
-      --orange-dark:#ef6c00;
-      --green:#2e7d32;
-      --green-soft:#e8f5e9;
-      --red:#c62828;
-      --red-soft:#ffebee;
-      --purple:#7b1fa2;
-      --yellow:#f9a825;
-      --text:#263238;
-      --muted:#607d8b;
-      --border:#dbe5ee;
+      --navy:#073b73;
+      --navy-2:#0a4b8f;
+      --blue:#0d6efd;
+      --blue-soft:#eaf4ff;
+      --green:#139b43;
+      --green-soft:#eaf8ee;
+      --orange:#ff9f0a;
+      --yellow:#ffc328;
+      --purple:#8247e5;
+      --red:#e53935;
+      --text:#17345b;
+      --muted:#5e718b;
+      --line:#d9e4ef;
       --card:#ffffff;
-      --shadow:0 10px 28px rgba(30,70,110,.11);
+      --shadow:0 12px 30px rgba(26,71,113,.10);
+      --radius:20px;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
-
     html{scroll-behavior:smooth}
-
     body{
-      font-family:Arial,Helvetica,sans-serif;
-      background:linear-gradient(135deg,#e3f2fd,#fff8e1 50%,#e8f5e9);
+      font-family:"Trebuchet MS",Arial,Helvetica,sans-serif;
       color:var(--text);
       min-height:100vh;
+      background:
+        radial-gradient(circle at 18% 18%,rgba(105,190,255,.22),transparent 26%),
+        radial-gradient(circle at 86% 70%,rgba(123,220,112,.20),transparent 28%),
+        linear-gradient(135deg,#eef9ff 0%,#f8fcff 52%,#effbf1 100%);
     }
 
-    button,input,select{font-family:inherit}
-
-    a{text-decoration:none}
-
-    .container{
-      width:min(1160px,94%);
-      margin:auto;
-      padding:24px 0 50px;
-    }
-
-    .header{
-      background:linear-gradient(135deg,#0d47a1,#1565c0,#0288d1);
-      color:white;
-      border-radius:28px;
-      padding:32px;
-      box-shadow:0 16px 40px rgba(13,71,161,.25);
-      margin-bottom:22px;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .header::after{
-      content:"📊";
-      position:absolute;
-      right:22px;
-      bottom:-24px;
-      font-size:130px;
-      opacity:.12;
-    }
-
-    .header-content{
-      position:relative;
-      z-index:2;
-      max-width:calc(100% - 270px);
-      min-height:205px;
-    }
-
-    .header-logo-wrap{
-      position:absolute;
-      z-index:3;
-      top:18px;
-      right:22px;
-      width:230px;
-      height:230px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .header-logo{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      filter:drop-shadow(0 10px 16px rgba(0,0,0,.24));
-      transition:transform .25s ease;
-    }
-
-    .header-logo:hover{
-      transform:scale(1.04) rotate(1deg);
-    }
-
-    .badge{
-      display:inline-block;
-      background:var(--orange);
-      color:white;
-      padding:7px 14px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:bold;
-      margin-bottom:12px;
-    }
-
-    .header h1{font-size:38px;margin-bottom:8px}
-
-    .header p{line-height:1.7}
-
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:22px;
-      padding:24px;
-      margin-bottom:22px;
-      box-shadow:var(--shadow);
-    }
-
-    .card h2{
-      color:var(--primary-dark);
-      margin-bottom:10px;
-    }
-
-    .subtitle{
-      color:var(--muted);
-      line-height:1.65;
-      margin-bottom:18px;
-    }
-
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-
-    label.field-label{
-      display:block;
-      font-weight:bold;
-      margin-bottom:7px;
-    }
-
-    input,select{
-      width:100%;
-      padding:13px 14px;
-      border:1px solid #cfd8dc;
-      border-radius:12px;
-      font-size:16px;
-      outline:none;
-      background:#fff;
-    }
-
-    input:focus,select:focus{
-      border-color:var(--primary);
-      box-shadow:0 0 0 3px rgba(21,101,192,.12);
-    }
-
-    .btn-row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:18px;
-    }
-
-    .btn{
-      border:0;
-      border-radius:12px;
-      padding:13px 19px;
-      font-size:15px;
-      font-weight:bold;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:7px;
-      transition:.2s;
-    }
-
-    .btn:hover{transform:translateY(-2px)}
-    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
-    .btn-primary{background:var(--primary);color:white}
-    .btn-green{background:var(--green);color:white}
-    .btn-orange{background:var(--orange);color:white}
-    .btn-purple{background:var(--purple);color:white}
-    .btn-light{background:#eceff1;color:var(--text)}
-    .btn-red{background:var(--red);color:white}
-    .btn-block{width:100%}
-
-    .profile{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      flex-wrap:wrap;
-    }
-
-    .profile-left{display:flex;align-items:center;gap:14px}
-
-    .avatar{
-      width:64px;height:64px;border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      background:linear-gradient(135deg,#ffcc80,#ff9800);
-      font-size:34px;
-    }
-
-    .name{font-size:21px;font-weight:bold;color:var(--primary-dark)}
-    .class-name{color:var(--muted);margin-top:4px}
-
-    .network{
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:bold;
-    }
-
-    .online{background:var(--green-soft);color:var(--green)}
-    .offline{background:var(--red-soft);color:var(--red)}
-
-    .learning-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-    }
-
-    .learning-card{
-      min-height:250px;
-      border:1px solid var(--border);
-      border-radius:20px;
-      padding:22px;
-      display:flex;
-      flex-direction:column;
-      transition:.25s;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .learning-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
-    .literasi{background:linear-gradient(145deg,#e3f2fd,#fff)}
-    .numerasi{background:linear-gradient(145deg,#e8f5e9,#fff)}
-    .challenge{background:linear-gradient(145deg,#fff3e0,#fff)}
-    .learning-icon{font-size:48px;margin-bottom:12px}
-    .learning-card h3{font-size:21px;margin-bottom:9px}
-    .learning-card p{color:var(--muted);line-height:1.6;font-size:14px;flex:1}
-    .literasi h3{color:var(--primary-dark)}
-    .numerasi h3{color:var(--green)}
-    .challenge h3{color:var(--orange-dark)}
-
-    .progress-levels{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-    }
-
-    .progress-card{
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:17px;
-      background:#fafcfe;
-    }
-
-    .progress-card strong{display:block;margin-bottom:7px}
-    .progress-card small{color:var(--muted)}
-    .score-mini{font-size:25px;font-weight:bold;margin-top:8px;color:var(--primary-dark)}
-
-    .status-pill{
-      display:inline-block;
-      padding:5px 9px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:bold;
-      margin-top:8px;
-    }
-
-    .st-lulus{background:var(--green-soft);color:var(--green)}
-    .st-remedial{background:var(--red-soft);color:var(--red)}
-    .st-proses{background:#fff8e1;color:#e65100}
-    .st-belum{background:var(--primary-soft);color:var(--primary-dark)}
-    .st-terkunci{background:#eceff1;color:#607d8b}
-
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    a{text-decoration:none;color:inherit}
     .hidden{display:none!important}
 
-    /* MODAL LEVEL */
-    .modal{
-      position:fixed;
-      inset:0;
-      background:rgba(13,31,46,.68);
+    /* ===================== TOP NAV ===================== */
+    .topbar{
+      height:112px;
+      background:linear-gradient(90deg,#073567,#063f7c 55%,#073567);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      padding:0 30px;
+      box-shadow:0 4px 18px rgba(1,37,75,.20);
+      position:relative;
+      z-index:20;
+    }
+
+    .brand{
+      width:315px;
+      flex-shrink:0;
+    }
+    .brand-title{
+      font-size:34px;
+      font-weight:900;
+      letter-spacing:1px;
+      line-height:1;
+    }
+    .brand-title span:nth-child(1){color:#ff4b55}
+    .brand-title span:nth-child(2){color:#ffc400}
+    .brand-title span:nth-child(3){color:#73d13d}
+    .brand-title span:nth-child(4){color:#32a8ff}
+    .brand-title span:nth-child(5){color:#a167ed}
+    .brand-title span:nth-child(6){color:#ffbd21}
+    .brand-sub{font-size:14px;font-weight:700;margin-top:8px;opacity:.96}
+
+    .nav-menu{
+      display:flex;
+      align-self:stretch;
+      align-items:center;
+      gap:16px;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-link{
+      position:relative;
+      min-width:126px;
+      height:100%;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:18px;
-      z-index:1000;
+      gap:9px;
+      font-size:16px;
+      font-weight:800;
+      color:#fff;
+      opacity:.95;
+    }
+    .nav-link:hover{background:rgba(255,255,255,.06)}
+    .nav-link.active::after{
+      content:"";
+      position:absolute;
+      left:20px;right:20px;bottom:19px;
+      height:4px;border-radius:9px;background:#ffc400;
+    }
+    .nav-icon{font-size:22px}
+
+    .top-logo{
+      width:205px;
+      height:104px;
+      object-fit:contain;
+      flex-shrink:0;
+      filter:drop-shadow(0 6px 7px rgba(0,0,0,.28));
     }
 
-    .modal-box{
-      width:min(850px,100%);
-      max-height:92vh;
-      overflow:auto;
-      background:white;
-      border-radius:24px;
-      padding:24px;
-      box-shadow:0 24px 70px rgba(0,0,0,.28);
+    /* ===================== LAYOUT ===================== */
+    .page{
+      width:min(1500px,97%);
+      margin:0 auto;
+      padding:0 0 24px;
     }
 
-    .modal-head{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      align-items:flex-start;
-      margin-bottom:18px;
+    .hero{
+      margin-top:0;
+      min-height:270px;
+      border-radius:0 0 22px 22px;
+      background:
+        linear-gradient(90deg,rgba(255,255,255,.94),rgba(255,255,255,.78)),
+        linear-gradient(135deg,#dff3ff,#f2fff1);
+      position:relative;
+      overflow:hidden;
+      padding:35px 38px;
+      border:1px solid rgba(205,224,238,.7);
     }
-
-    .modal-head h2{color:var(--primary-dark)}
-    .close{
-      border:0;background:#eceff1;width:38px;height:38px;border-radius:50%;
-      cursor:pointer;font-size:19px;
+    .hero::before{
+      content:"";
+      position:absolute;
+      left:-5%;right:-5%;bottom:-28px;
+      height:100px;
+      background:
+        radial-gradient(ellipse at 20% 100%,#dcefdc 0 45%,transparent 46%),
+        radial-gradient(ellipse at 50% 100%,#d3e9d1 0 48%,transparent 49%),
+        radial-gradient(ellipse at 80% 100%,#dff2da 0 44%,transparent 45%);
+      opacity:.65;
     }
-
-    .level-grid{
+    .hero-grid{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
+      grid-template-columns:1.12fr .78fr;
+      gap:44px;
+      align-items:center;
+      position:relative;
+      z-index:2;
     }
-
-    .level-option{
-      border:2px solid var(--border);
-      border-radius:18px;
-      padding:18px;
+    .welcome-eyebrow{
+      font-size:26px;
+      font-weight:900;
+      margin-bottom:4px;
+      color:#103f80;
+    }
+    .hero h1{
+      font-size:34px;
+      line-height:1.2;
+      color:#103f80;
+      margin-bottom:10px;
+    }
+    .hero-copy{
+      max-width:720px;
+      color:#344c68;
+      font-size:17px;
+      line-height:1.7;
+    }
+    .topic-chips{
+      display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;
+    }
+    .chip{
+      display:inline-flex;align-items:center;gap:9px;
+      padding:10px 19px;border-radius:999px;
       background:#fff;
-      text-align:left;
-      cursor:pointer;
-      transition:.2s;
+      border:1px solid #d9e4ef;
+      font-weight:900;
+      box-shadow:0 5px 12px rgba(23,52,91,.06);
+    }
+    .chip.lit{color:#9a5710;background:#fff9ea}
+    .chip.num{color:#17345b}
+    .chip.char{color:#0c7d32;background:#effbef}
+
+    .profile-panel{
+      background:rgba(255,255,255,.88);
+      border:1px solid #dce7f0;
+      border-radius:18px;
+      padding:20px 22px;
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-columns:68px 1fr;
+      gap:16px;
+      min-height:164px;
+      align-items:start;
+    }
+    .avatar{
+      width:62px;height:62px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(145deg,#ffddb0,#ffad42);
+      font-size:34px;
+      border:5px solid #fff;
+      box-shadow:0 4px 13px rgba(0,0,0,.10);
+    }
+    .profile-data{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+    .profile-field label{
+      display:block;font-size:12px;color:var(--muted);margin-bottom:2px;
+    }
+    .profile-field strong{font-size:17px;color:#0d2f60}
+    .profile-field.id{grid-column:1/-1}
+    .profile-id{
+      display:block;overflow-wrap:anywhere;
+      font-size:14px!important;
+    }
+    .network{
+      grid-column:1/-1;
+      width:max-content;
+      padding:6px 11px;border-radius:999px;
+      font-size:12px;font-weight:900;
+    }
+    .online{background:#e8f9ed;color:#087a2c;border:1px solid #afe4bd}
+    .offline{background:#fff0f0;color:#b42318;border:1px solid #ffc9c9}
+
+    /* ===================== IDENTITY ===================== */
+    .identity-wrap{
+      min-height:calc(100vh - 112px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:35px 20px;
+    }
+    .identity-card{
+      width:min(780px,100%);
+      background:#fff;
+      border-radius:24px;
+      padding:30px;
+      box-shadow:0 18px 50px rgba(17,71,118,.16);
+      border:1px solid #dce7f0;
+    }
+    .identity-head{text-align:center;margin-bottom:22px}
+    .identity-logo{width:180px;height:180px;object-fit:contain;margin:-16px auto 4px;display:block}
+    .identity-head h2{font-size:30px;color:#103f80;margin-bottom:8px}
+    .identity-head p{color:var(--muted);line-height:1.6}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .field-label{display:block;font-weight:900;margin-bottom:7px}
+    input,select{
+      width:100%;padding:13px 14px;border-radius:12px;
+      border:1px solid #cbd9e6;background:#fff;font-size:16px;outline:none;
+    }
+    input:focus,select:focus{border-color:#4285f4;box-shadow:0 0 0 3px rgba(66,133,244,.12)}
+
+    /* ===================== MAIN DASHBOARD ===================== */
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
+      margin-top:24px;
+    }
+    .panel{
+      background:rgba(255,255,255,.94);
+      border:1px solid #dbe6ef;
+      border-radius:20px;
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+    .panel-head{
+      display:flex;gap:14px;align-items:center;margin-bottom:18px;
+    }
+    .panel-icon{
+      width:58px;height:58px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-size:30px;flex-shrink:0;
+    }
+    .blue-circle{background:linear-gradient(145deg,#1577e8,#0455bd)}
+    .green-circle{background:linear-gradient(145deg,#24b653,#0c8a37)}
+    .panel h2{font-size:24px;margin-bottom:4px}
+    .panel-head p{color:#344c68;font-size:14px;line-height:1.5}
+
+    .levels-preview{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:15px;
+    }
+    .level-preview{
+      position:relative;
+      min-height:270px;
+      border:1px solid #d8e2ea;
+      border-radius:17px;
+      background:#fff;
+      padding:20px 15px;
+      text-align:center;
+      display:flex;flex-direction:column;align-items:center;
+      box-shadow:0 5px 14px rgba(35,69,104,.05);
+    }
+    .level-preview .emoji{font-size:48px;line-height:1;margin:8px 0 12px}
+    .level-preview h3{font-size:23px;margin-bottom:6px}
+    .level-preview.awal h3{color:#168a35}
+    .level-preview.cakap h3{color:#0861c9}
+    .level-preview.mahir h3{color:#7d35d8}
+    .level-preview p{font-size:14px;line-height:1.45;color:#24425e}
+    .availability{
+      width:80%;margin:12px auto 8px;padding:6px 10px;border-radius:999px;
+      font-size:12px;font-weight:900;
+    }
+    .available{background:#ebfaee;color:#07822c}
+    .locked{background:#eef1f4;color:#607080}
+    .level-note{font-size:12px!important;color:#4d6278!important;margin-top:auto;padding-top:8px}
+    .lock-badge{
+      position:absolute;right:10px;top:-9px;
+      width:44px;height:44px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      background:#e9edf1;border:1px solid #d5dde5;font-size:20px;
     }
 
-    .level-option:not(:disabled):hover{
-      border-color:var(--primary);
-      transform:translateY(-3px);
+    .progress-list{
+      border:1px solid #d9e4ec;border-radius:15px;overflow:hidden;
+    }
+    .progress-row{
+      display:grid;
+      grid-template-columns:54px 1.25fr .62fr .45fr 70px;
+      gap:12px;
+      align-items:center;
+      min-height:92px;
+      padding:13px 16px;
+      border-bottom:1px solid #dfe7ed;
+    }
+    .progress-row:last-child{border-bottom:0}
+    .round-icon{
+      width:48px;height:48px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;
+    }
+    .round-icon.awal{background:#15963c}
+    .round-icon.cakap{background:#0b68d7}
+    .round-icon.mahir{background:#8544dc}
+    .progress-name strong{font-size:18px;display:block}
+    .progress-name small{font-size:12px;color:#4f6378}
+    .status-col small,.score-col small{display:block;color:#52657b;font-size:11px;margin-bottom:4px}
+    .score-value{font-weight:900;font-size:16px}
+    .status-pill{
+      display:inline-block;padding:5px 9px;border-radius:7px;
+      font-size:11px;font-weight:900;
+    }
+    .st-lulus{background:#e6f8eb;color:#087c2c}
+    .st-remedial{background:#ffeded;color:#bf2424}
+    .st-proses{background:#eaf8ee;color:#118536}
+    .st-belum{background:#edf5ff;color:#0a5ebd}
+    .st-terkunci{background:#eceff2;color:#617080}
+    .ring{
+      width:55px;height:55px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      border:7px solid #e5e9ed;font-size:14px;font-weight:900;color:#324d6c;
+      position:relative;
+    }
+    .ring.active{border-color:#dff2e4;border-top-color:#15963c}
+    .detail-progress{
+      margin-top:18px;text-align:center;padding:11px;border-radius:10px;
+      background:#f1fbf3;border:1px solid #cdebd5;color:#118536;font-weight:900;
     }
 
-    .level-option:disabled{
-      cursor:not-allowed;
-      background:#f5f5f5;
-      opacity:.68;
+    .info-strip{
+      margin-top:20px;
+      border:1px solid #d7e5ef;
+      border-radius:17px;
+      padding:13px 20px;
+      display:flex;gap:14px;align-items:flex-start;
+      background:rgba(244,250,255,.92);
+    }
+    .info-icon{
+      width:36px;height:36px;border-radius:50%;background:#0f67d3;color:#fff;
+      display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;
+    }
+    .info-strip strong{display:block;color:#0b4e9d;margin-bottom:4px}
+    .info-strip p{font-size:13px;line-height:1.55;color:#465b73}
+
+    /* ===================== BUTTONS ===================== */
+    .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .btn{
+      border:0;border-radius:11px;padding:13px 20px;font-weight:900;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      transition:.2s;text-decoration:none;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn:disabled{opacity:.55;transform:none;cursor:not-allowed}
+    .btn-primary{background:#0d6efd;color:#fff}
+    .btn-green{background:#149b43;color:#fff}
+    .btn-orange{background:#ff9900;color:#fff}
+    .btn-purple{background:#7e42d7;color:#fff}
+    .btn-light{background:#edf1f5;color:#26415e}
+    .btn-red{background:#d83a3a;color:#fff}
+    .btn-block{width:100%}
+    .big-challenge{
+      width:55%;margin:20px auto 0;padding:15px 22px;
+      background:linear-gradient(90deg,#0f65dc,#0d79ed);color:#fff;font-size:20px;
+      border-radius:10px;
     }
 
+    /* ===================== MODAL LEVEL ===================== */
+    .modal{
+      position:fixed;inset:0;background:rgba(4,25,47,.68);
+      display:flex;align-items:center;justify-content:center;padding:18px;z-index:1000;
+    }
+    .modal-box{
+      width:min(900px,100%);max-height:92vh;overflow:auto;
+      background:#fff;border-radius:24px;padding:24px;box-shadow:0 24px 70px rgba(0,0,0,.28);
+    }
+    .modal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:18px}
+    .modal-head h2{color:#0c4f9f}
+    .modal-head .subtitle{color:var(--muted);line-height:1.5}
+    .close{
+      border:0;background:#eef1f4;width:38px;height:38px;border-radius:50%;font-size:19px;
+    }
+    .level-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .level-option{
+      border:2px solid #dae5ee;border-radius:18px;padding:18px;background:#fff;
+      text-align:left;transition:.2s;
+    }
+    .level-option:not(:disabled):hover{border-color:#0d6efd;transform:translateY(-3px)}
+    .level-option:disabled{cursor:not-allowed;background:#f5f6f7;opacity:.68}
     .level-icon{font-size:40px}
     .level-option h3{margin:10px 0 7px}
     .level-option p{color:var(--muted);font-size:13px;line-height:1.55}
-    .level-meta{margin-top:12px;font-weight:bold;font-size:13px}
+    .level-meta{margin-top:12px;font-weight:900;font-size:13px}
 
-    /* CHALLENGE AREA */
-    .challenge-header{
-      background:linear-gradient(135deg,#fff3e0,#fff);
-      border-left:7px solid var(--orange);
+    /* ===================== CHALLENGE ===================== */
+    .challenge-shell{margin-top:24px}
+    .card{
+      background:#fff;border:1px solid var(--line);border-radius:18px;
+      padding:22px;margin-bottom:18px;box-shadow:var(--shadow);
     }
-
-    .challenge-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-
-    .level-badge{
-      background:var(--orange);
-      color:#fff;
-      padding:8px 13px;
-      border-radius:999px;
-      font-weight:bold;
-      font-size:13px;
-    }
-
-    .progress-info{
-      display:flex;
-      justify-content:space-between;
-      margin-bottom:7px;
-      font-weight:bold;
-      font-size:14px;
-    }
-
-    .progress-track{
-      height:14px;background:#e0e0e0;border-radius:999px;overflow:hidden;
-    }
-
-    .progress-bar{
-      height:100%;
-      width:0;
-      background:linear-gradient(90deg,#ff9800,#fbc02d);
-      transition:.3s;
-    }
-
-    .sync-message{
-      margin-top:12px;
-      padding:10px 12px;
-      border-radius:10px;
-      font-size:13px;
-      background:#f5f5f5;
-      color:var(--muted);
-    }
-
-    .question{
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:20px;
-      margin-bottom:18px;
-    }
-
-    .q-meta{
-      color:var(--orange-dark);
-      font-size:13px;
-      font-weight:bold;
-      margin-bottom:8px;
-    }
-
-    .stimulus{
-      background:#fff8e1;
-      border-left:5px solid var(--orange);
-      padding:14px;
-      border-radius:12px;
-      margin-bottom:13px;
-      line-height:1.65;
-    }
-
-    .q-text{
-      font-weight:bold;
-      font-size:17px;
-      line-height:1.6;
-      margin-bottom:14px;
-    }
-
-    .option{
-      display:flex;
-      align-items:flex-start;
-      gap:10px;
-      border:2px solid #eceff1;
-      border-radius:12px;
-      padding:12px;
-      margin-bottom:9px;
-      cursor:pointer;
-      transition:.2s;
-    }
-
+    .subtitle{color:var(--muted);line-height:1.6;margin-bottom:18px}
+    .challenge-header{background:linear-gradient(135deg,#fff7e6,#fff);border-left:7px solid #ff9f0a}
+    .challenge-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .level-badge{background:#ff9f0a;color:#fff;padding:8px 13px;border-radius:999px;font-weight:900;font-size:13px}
+    .progress-info{display:flex;justify-content:space-between;margin-bottom:7px;font-weight:900;font-size:14px}
+    .progress-track{height:14px;background:#e0e5e9;border-radius:999px;overflow:hidden}
+    .progress-bar{height:100%;width:0;background:linear-gradient(90deg,#ff9800,#fbc02d);transition:.3s}
+    .sync-message{margin-top:12px;padding:10px 12px;border-radius:10px;font-size:13px;background:#f5f7f9;color:var(--muted)}
+    .question{border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:18px}
+    .q-meta{color:#e97400;font-size:13px;font-weight:900;margin-bottom:8px}
+    .stimulus{background:#fff8e1;border-left:5px solid #ff9800;padding:14px;border-radius:12px;margin-bottom:13px;line-height:1.65}
+    .q-text{font-weight:900;font-size:17px;line-height:1.6;margin-bottom:14px}
+    .option{display:flex;align-items:flex-start;gap:10px;border:2px solid #eceff1;border-radius:12px;padding:12px;margin-bottom:9px;cursor:pointer;transition:.2s}
     .option:hover{border-color:#90caf9;background:#f7fcff}
     .option input{width:auto;margin-top:3px}
-    .option.selected{border-color:var(--primary);background:#eaf4ff}
-
-    .feedback{
-      margin-top:12px;
-      padding:12px;
-      border-radius:11px;
-      line-height:1.6;
-      font-size:14px;
-    }
-
-    .feedback.good{background:var(--green-soft);color:#1b5e20}
-    .feedback.bad{background:var(--red-soft);color:#b71c1c}
-
-    .result-box{
-      text-align:center;
-      background:linear-gradient(145deg,#fff,#f8fbff);
-    }
-
+    .option.selected{border-color:#0d6efd;background:#eaf4ff}
+    .feedback{margin-top:12px;padding:12px;border-radius:11px;line-height:1.6;font-size:14px}
+    .feedback.good{background:#e8f5e9;color:#1b5e20}
+    .feedback.bad{background:#ffebee;color:#b71c1c}
+    .result-box{text-align:center;background:linear-gradient(145deg,#fff,#f8fbff)}
     .score-circle{
-      width:145px;height:145px;border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      margin:18px auto;
-      font-size:38px;font-weight:bold;color:white;
-      background:linear-gradient(135deg,#1565c0,#29b6f6);
-      box-shadow:0 12px 28px rgba(21,101,192,.25);
+      width:145px;height:145px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+      margin:18px auto;font-size:38px;font-weight:900;color:#fff;
+      background:linear-gradient(135deg,#1565c0,#29b6f6);box-shadow:0 12px 28px rgba(21,101,192,.25);
     }
-
-    .remedial-box{
-      background:var(--red-soft);
-      border:1px solid #ffcdd2;
-      border-radius:15px;
-      padding:16px;
-      margin-top:16px;
-      color:#b71c1c;
-      text-align:left;
-      line-height:1.65;
-    }
-
-    .pass-box{
-      background:var(--green-soft);
-      border:1px solid #c8e6c9;
-      border-radius:15px;
-      padding:16px;
-      margin-top:16px;
-      color:#1b5e20;
-      text-align:left;
-      line-height:1.65;
-    }
-
-    .loading{
-      padding:28px;
-      text-align:center;
-      color:var(--muted);
-    }
-
-    .spinner{
-      width:34px;height:34px;border:4px solid #e0e0e0;border-top-color:var(--primary);
-      border-radius:50%;margin:0 auto 10px;animation:spin .8s linear infinite;
-    }
-
+    .remedial-box{background:#ffebee;border:1px solid #ffcdd2;border-radius:15px;padding:16px;margin-top:16px;color:#b71c1c;text-align:left;line-height:1.65}
+    .pass-box{background:#e8f5e9;border:1px solid #c8e6c9;border-radius:15px;padding:16px;margin-top:16px;color:#1b5e20;text-align:left;line-height:1.65}
+    .loading{padding:28px;text-align:center;color:var(--muted)}
+    .spinner{width:34px;height:34px;border:4px solid #e0e0e0;border-top-color:#0d6efd;border-radius:50%;margin:0 auto 10px;animation:spin .8s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
 
     footer{
-      text-align:center;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:13px;
+      margin-top:14px;background:linear-gradient(90deg,#073567,#063f7c);
+      color:#fff;text-align:center;padding:17px;font-size:13px;
     }
 
-    @media(max-width:850px){
-      .learning-grid,.progress-levels,.level-grid{grid-template-columns:1fr}
+    @media(max-width:1100px){
+      .brand{width:260px}
+      .brand-title{font-size:29px}
+      .nav-link{min-width:105px}
+      .top-logo{width:170px}
+      .dashboard-grid{grid-template-columns:1fr}
     }
-
-    @media(max-width:850px){
-      .header-content{
-        max-width:calc(100% - 190px);
-        min-height:160px;
-      }
-      .header-logo-wrap{
-        width:165px;
-        height:165px;
-        top:18px;
-        right:18px;
-      }
+    @media(max-width:860px){
+      .topbar{height:auto;min-height:100px;flex-wrap:wrap;padding:12px 20px}
+      .brand{width:50%}
+      .top-logo{width:145px;height:85px;margin-left:auto}
+      .nav-menu{order:3;width:100%;height:55px;overflow:auto;justify-content:flex-start}
+      .nav-link{height:55px;min-width:110px}
+      .nav-link.active::after{bottom:2px}
+      .hero-grid{grid-template-columns:1fr}
+      .levels-preview{grid-template-columns:1fr}
+      .progress-row{grid-template-columns:48px 1fr .6fr .45fr 58px}
     }
-
-    @media(max-width:650px){
+    @media(max-width:620px){
+      .brand{width:65%}
+      .brand-title{font-size:24px}
+      .brand-sub{font-size:11px}
+      .top-logo{width:110px}
+      .page{width:94%}
+      .hero{padding:24px 18px}
+      .hero h1{font-size:29px}
+      .welcome-eyebrow{font-size:22px}
+      .profile-panel{grid-template-columns:54px 1fr;padding:16px}
+      .profile-data{grid-template-columns:1fr}
+      .profile-field.id{grid-column:auto}
+      .dashboard-grid{gap:18px}
+      .panel{padding:17px}
+      .level-grid{grid-template-columns:1fr}
       .form-grid{grid-template-columns:1fr}
-      .header{
-        padding:22px 20px;
-        text-align:center;
+      .big-challenge{width:100%;font-size:17px}
+      .progress-row{
+        grid-template-columns:44px 1fr 55px;
+        gap:9px;padding:12px 10px;
       }
-      .header-content{
-        max-width:100%;
-        min-height:0;
-      }
-      .header-logo-wrap{
-        position:relative;
-        top:auto;
-        right:auto;
-        width:150px;
-        height:150px;
-        margin:0 auto 12px;
-      }
-      .header h1{font-size:29px}
-      .card{padding:18px}
+      .status-col,.score-col{grid-column:2}
+      .ring{grid-column:3;grid-row:1/4}
     }
   </style>
 </head>
 
 <body>
-<div class="container">
 
-  <header class="header">
-    <div class="header-logo-wrap">
-      <img
-        src="img/logo-pikto-ips.png"
-        alt="Logo PIKTO-IPS"
-        class="header-logo"
-        onerror="this.parentElement.style.display='none';"
-      >
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-title">
+        <span>P</span><span>I</span><span>K</span><span>T</span><span>O</span><span>-IPS</span>
+      </div>
+      <div class="brand-sub">Belajar IPS Jadi Seru dan Mudah!</div>
     </div>
 
-    <div class="header-content">
-      <span class="badge">IPS • LITERASI • NUMERASI • PIKTOGRAM</span>
-      <h1>📊 PIKTO-IPS</h1>
-      <p>
-        Belajar memahami kehidupan masyarakat melalui cerita, data, piktogram,
-        perhitungan, dan pengambilan keputusan.
-      </p>
-    </div>
+    <nav class="nav-menu">
+      <a class="nav-link active" href="#beranda"><span class="nav-icon">🏠</span>Beranda</a>
+      <a class="nav-link" href="literasi.html"><span class="nav-icon">📖</span>Belajar</a>
+      <a class="nav-link" href="#tantangan" onclick="setTimeout(bukaPemilihanLevel,0)"><span class="nav-icon">🏆</span>Tantangan</a>
+      <a class="nav-link" href="#progres"><span class="nav-icon">📊</span>Progres</a>
+    </nav>
+
+    <img
+      src="img/logo-pikto-ips.png"
+      alt="Logo PIKTO-IPS"
+      class="top-logo"
+      onerror="this.style.visibility='hidden';"
+    >
   </header>
 
   <!-- IDENTITAS -->
-  <section class="card" id="identityCard">
-    <h2>👦 Halo, Anak Hebat!</h2>
-    <p class="subtitle">
-      Masukkan identitas sebelum belajar. Progres tantangan akan disimpan agar
-      jawaban tidak hilang ketika halaman ditutup atau koneksi internet terputus.
-    </p>
-
-    <div class="form-grid">
-      <div>
-        <label class="field-label" for="nama">Nama Lengkap</label>
-        <input id="nama" type="text" placeholder="Contoh: Budi Santoso">
+  <section class="identity-wrap" id="identityCard">
+    <div class="identity-card">
+      <div class="identity-head">
+        <img src="img/logo-pikto-ips.png" alt="Logo PIKTO-IPS" class="identity-logo" onerror="this.style.display='none'">
+        <h2>👋 Selamat Datang di PIKTO-IPS!</h2>
+        <p>
+          Masukkan identitasmu terlebih dahulu. Progres dan jawaban akan disimpan
+          agar kamu dapat melanjutkan belajar meskipun sempat berhenti atau jaringan terputus.
+        </p>
       </div>
 
-      <div>
-        <label class="field-label" for="kelas">Kelas</label>
-        <select id="kelas">
-          <option value="">Pilih kelas</option>
-          <option>Kelas 4A</option>
-          <option>Kelas 4B</option>
-          <option>Kelas 4C</option>
-        </select>
+      <div class="form-grid">
+        <div>
+          <label class="field-label" for="nama">Nama Lengkap</label>
+          <input id="nama" type="text" placeholder="Contoh: Budi Santoso">
+        </div>
+        <div>
+          <label class="field-label" for="kelas">Kelas</label>
+          <select id="kelas">
+            <option value="">Pilih kelas</option>
+            <option>Kelas 4A</option>
+            <option>Kelas 4B</option>
+            <option>Kelas 4C</option>
+          </select>
+        </div>
       </div>
-    </div>
 
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="masukAplikasi()">
-        🚀 Masuk ke Aplikasi
-      </button>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-block" onclick="masukAplikasi()">🚀 Masuk ke Aplikasi</button>
+      </div>
     </div>
   </section>
 
-  <!-- APP -->
+  <!-- AREA APLIKASI -->
   <main id="appArea" class="hidden">
+    <div class="page">
 
-    <section class="card">
-      <div class="profile">
-        <div class="profile-left">
-          <div class="avatar">🧑‍🎓</div>
+      <section class="hero" id="beranda">
+        <div class="hero-grid">
           <div>
-            <div class="name" id="profileName">Murid</div>
-            <div class="class-name" id="profileClass">Kelas</div>
-          </div>
-        </div>
-
-        <div id="networkStatus" class="network online">
-          🟢 Online
-        </div>
-      </div>
-    </section>
-
-    <!-- MENU BELAJAR -->
-    <section class="card">
-      <h2>🗺️ Jalur Belajarmu</h2>
-      <p class="subtitle">
-        Pelajari Literasi dan Numerasi terlebih dahulu. Setelah siap, buka
-        Tantangan dan pilih level kemampuanmu.
-      </p>
-
-      <div class="learning-grid">
-
-        <div class="learning-card literasi">
-          <div class="learning-icon">📖</div>
-          <h3>Belajar Literasi</h3>
-          <p>
-            Memahami cerita IPS, ide pokok, informasi tersurat dan tersirat,
-            membaca data, serta membuat kesimpulan.
-          </p>
-          <a class="btn btn-primary btn-block" href="literasi.html">
-            📖 Buka Materi Literasi
-          </a>
-        </div>
-
-        <div class="learning-card numerasi">
-          <div class="learning-icon">🔢</div>
-          <h3>Belajar Numerasi</h3>
-          <p>
-            Mengubah simbol menjadi angka, menghitung jumlah dan selisih,
-            membandingkan data, serta mengambil keputusan.
-          </p>
-          <a class="btn btn-green btn-block" href="numerasi.html">
-            🔢 Buka Materi Numerasi
-          </a>
-        </div>
-
-        <div class="learning-card challenge">
-          <div class="learning-icon">🏆</div>
-          <h3>Tantangan Piktogram</h3>
-          <p>
-            Pilih Level Awal, Cakap, atau Mahir. Level berikutnya terbuka
-            setelah memperoleh nilai minimal 60.
-          </p>
-          <button class="btn btn-orange btn-block" onclick="bukaPemilihanLevel()">
-            🏆 Mulai Tantangan
-          </button>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- PROGRES LEVEL -->
-    <section class="card">
-      <h2>📈 Progres Kompetensiku</h2>
-      <p class="subtitle">
-        Nilai dan status setiap level tersimpan pada database.
-      </p>
-
-      <div class="progress-levels">
-        <div class="progress-card">
-          <strong>🌱 Level Awal</strong>
-          <small>Membaca dan memahami data dasar.</small>
-          <div class="score-mini" id="scoreAwal">-</div>
-          <span class="status-pill st-belum" id="statusAwal">BELUM</span>
-        </div>
-
-        <div class="progress-card">
-          <strong>🚀 Level Cakap</strong>
-          <small>Mengolah data dan menyelesaikan masalah.</small>
-          <div class="score-mini" id="scoreCakap">-</div>
-          <span class="status-pill st-terkunci" id="statusCakap">TERKUNCI</span>
-        </div>
-
-        <div class="progress-card">
-          <strong>🏆 Level Mahir</strong>
-          <small>Penalaran dan pengambilan keputusan.</small>
-          <div class="score-mini" id="scoreMahir">-</div>
-          <span class="status-pill st-terkunci" id="statusMahir">TERKUNCI</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- AREA TANTANGAN DINAMIS -->
-    <section id="challengeArea" class="hidden">
-
-      <div class="card challenge-header">
-        <div class="challenge-top">
-          <div>
-            <h2 id="challengeTitle">🏆 Tantangan</h2>
-            <p class="subtitle" id="challengeDescription" style="margin-bottom:0">
-              Jawab dengan teliti.
+            <div class="welcome-eyebrow">Halo, 👋</div>
+            <h1>Selamat Datang di PIKTO-IPS!</h1>
+            <p class="hero-copy">
+              Belajar IPS menjadi lebih menyenangkan dengan piktogram, literasi,
+              numerasi, dan tantangan bertingkat.
             </p>
+
+            <div class="topic-chips">
+              <span class="chip lit">⭐ Literasi</span>
+              <span class="chip num">🔢 Numerasi</span>
+              <span class="chip char">❤️ Karakter</span>
+            </div>
           </div>
-          <div class="level-badge" id="currentLevelBadge">LEVEL AWAL</div>
+
+          <div class="profile-panel">
+            <div class="avatar">🧑‍🎓</div>
+
+            <div class="profile-data">
+              <div class="profile-field">
+                <label>Nama</label>
+                <strong id="profileName">Murid PIKTO</strong>
+              </div>
+              <div class="profile-field">
+                <label>Kelas</label>
+                <strong id="profileClass">-</strong>
+              </div>
+              <div class="profile-field id">
+                <label>ID Murid</label>
+                <strong class="profile-id" id="profileId">-</strong>
+              </div>
+              <div id="networkStatus" class="network online">🟢 Terhubung</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="dashboard-grid">
+        <!-- TANTANGAN -->
+        <section class="panel" id="tantangan">
+          <div class="panel-head">
+            <div class="panel-icon blue-circle">🏆</div>
+            <div>
+              <h2>Mulai Tantangan</h2>
+              <p>Pilih level kompetensi dan buktikan kemampuanmu!</p>
+            </div>
+          </div>
+
+          <div class="levels-preview">
+            <article class="level-preview awal">
+              <div class="emoji">🌱</div>
+              <h3>AWAL</h3>
+              <p>Kompetensi Dasar</p>
+              <div class="availability available" id="previewAwal">TERSEDIA</div>
+              <p class="level-note">Level untuk memulai pemahaman dasar IPS.</p>
+            </article>
+
+            <article class="level-preview cakap">
+              <div class="lock-badge" id="lockCakap">🔒</div>
+              <div class="emoji">🚀</div>
+              <h3>CAKAP</h3>
+              <p>Kompetensi Menengah</p>
+              <div class="availability locked" id="previewCakap">TERKUNCI</div>
+              <p class="level-note">Selesaikan Level Awal dengan nilai minimal 60.</p>
+            </article>
+
+            <article class="level-preview mahir">
+              <div class="lock-badge" id="lockMahir">🔒</div>
+              <div class="emoji">🏆</div>
+              <h3>MAHIR</h3>
+              <p>Kompetensi Tinggi</p>
+              <div class="availability locked" id="previewMahir">TERKUNCI</div>
+              <p class="level-note">Selesaikan Level Cakap dengan nilai minimal 60.</p>
+            </article>
+          </div>
+
+          <button class="btn big-challenge" onclick="bukaPemilihanLevel()">🏆 Mulai Tantangan</button>
+        </section>
+
+        <!-- PROGRES -->
+        <section class="panel" id="progres">
+          <div class="panel-head">
+            <div class="panel-icon green-circle">🌱</div>
+            <div>
+              <h2 style="color:#168b3d">Progres Belajarmu</h2>
+              <p>Pantau perkembangan dan pencapaianmu di setiap level.</p>
+            </div>
+          </div>
+
+          <div class="progress-list">
+            <div class="progress-row">
+              <div class="round-icon awal">🌱</div>
+              <div class="progress-name"><strong style="color:#14943a">AWAL</strong><small>Kompetensi Dasar</small></div>
+              <div class="status-col"><small>Status</small><span class="status-pill st-belum" id="statusAwal">BELUM</span></div>
+              <div class="score-col"><small>Nilai</small><div class="score-value" id="scoreAwal">-</div></div>
+              <div class="ring active" id="ringAwal">0/5</div>
+            </div>
+
+            <div class="progress-row">
+              <div class="round-icon cakap">🚀</div>
+              <div class="progress-name"><strong style="color:#0a64ce">CAKAP</strong><small>Kompetensi Menengah</small></div>
+              <div class="status-col"><small>Status</small><span class="status-pill st-terkunci" id="statusCakap">TERKUNCI</span></div>
+              <div class="score-col"><small>Nilai</small><div class="score-value" id="scoreCakap">-</div></div>
+              <div class="ring" id="ringCakap">0/5</div>
+            </div>
+
+            <div class="progress-row">
+              <div class="round-icon mahir">🏆</div>
+              <div class="progress-name"><strong style="color:#8241d6">MAHIR</strong><small>Kompetensi Tinggi</small></div>
+              <div class="status-col"><small>Status</small><span class="status-pill st-terkunci" id="statusMahir">TERKUNCI</span></div>
+              <div class="score-col"><small>Nilai</small><div class="score-value" id="scoreMahir">-</div></div>
+              <div class="ring" id="ringMahir">0/5</div>
+            </div>
+          </div>
+
+          <div class="detail-progress">📊 Lihat Detail Progres</div>
+        </section>
+      </div>
+
+      <div class="info-strip">
+        <div class="info-icon">i</div>
+        <div>
+          <strong>Informasi</strong>
+          <p>
+            Nilai minimal untuk lulus setiap level adalah 60. Jika belum mencapai nilai tersebut,
+            kamu akan diminta belajar kembali dan mencoba lagi.
+          </p>
         </div>
       </div>
 
-      <div class="card">
-        <div class="progress-info">
-          <span>Progres Jawaban</span>
-          <span id="questionProgressText">0 dari 0 soal</span>
+      <!-- AREA TANTANGAN DINAMIS -->
+      <section id="challengeArea" class="challenge-shell hidden">
+        <div class="card challenge-header">
+          <div class="challenge-top">
+            <div>
+              <h2 id="challengeTitle">🏆 Tantangan</h2>
+              <p class="subtitle" id="challengeDescription" style="margin-bottom:0">Jawab dengan teliti.</p>
+            </div>
+            <div class="level-badge" id="currentLevelBadge">LEVEL AWAL</div>
+          </div>
         </div>
-        <div class="progress-track">
-          <div class="progress-bar" id="questionProgressBar"></div>
+
+        <div class="card">
+          <div class="progress-info">
+            <span>Progres Jawaban</span>
+            <span id="questionProgressText">0 dari 0 soal</span>
+          </div>
+          <div class="progress-track"><div class="progress-bar" id="questionProgressBar"></div></div>
+          <div class="sync-message" id="syncMessage">Jawaban akan disimpan otomatis.</div>
         </div>
-        <div class="sync-message" id="syncMessage">
-          Jawaban akan disimpan otomatis.
+
+        <div class="card" id="questionsCard">
+          <div class="loading"><div class="spinner"></div>Memuat soal...</div>
         </div>
-      </div>
 
-      <div class="card" id="questionsCard">
-        <div class="loading">
-          <div class="spinner"></div>
-          Memuat soal...
-        </div>
-      </div>
+        <div class="card hidden" id="resultCard"></div>
+      </section>
 
-      <div class="card hidden" id="resultCard"></div>
+    </div>
 
-    </section>
-
+    <footer>© 2026 PIKTO-IPS - Belajar IPS Jadi Seru dan Mudah!</footer>
   </main>
 
-  <footer>
-    <strong>PIKTO-IPS</strong><br>
-    Media Pembelajaran IPS Berbasis Literasi, Numerasi, dan Piktogram
-  </footer>
-
-</div>
-
-<!-- MODAL LEVEL -->
-<div class="modal hidden" id="levelModal">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div>
-        <h2>🏆 Pilih Kompetensi Tantangan</h2>
-        <p class="subtitle" style="margin:5px 0 0">
-          Level berikutnya terbuka jika nilai level sebelumnya minimal 60.
-        </p>
+  <!-- MODAL LEVEL -->
+  <div class="modal hidden" id="levelModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div>
+          <h2>🏆 Pilih Kompetensi Tantangan</h2>
+          <p class="subtitle" style="margin:5px 0 0">
+            Level berikutnya terbuka jika nilai level sebelumnya minimal 60.
+          </p>
+        </div>
+        <button class="close" onclick="tutupPemilihanLevel()">✕</button>
       </div>
-      <button class="close" onclick="tutupPemilihanLevel()">✕</button>
-    </div>
 
-    <div class="level-grid">
-      <button class="level-option" id="levelAwalBtn" onclick="pilihLevel('AWAL')">
-        <div class="level-icon">🌱</div>
-        <h3>Level Awal</h3>
-        <p>
-          Membaca piktogram, memahami informasi langsung, membandingkan data sederhana,
-          dan mengenali kegiatan ekonomi.
-        </p>
-        <div class="level-meta" id="modalAwalMeta">Terbuka</div>
-      </button>
+      <div class="level-grid">
+        <button class="level-option" id="levelAwalBtn" onclick="pilihLevel('AWAL')">
+          <div class="level-icon">🌱</div>
+          <h3>Level Awal</h3>
+          <p>Membaca piktogram, memahami informasi langsung, membandingkan data sederhana, dan mengenali kegiatan ekonomi.</p>
+          <div class="level-meta" id="modalAwalMeta">Terbuka</div>
+        </button>
 
-      <button class="level-option" id="levelCakapBtn" onclick="pilihLevel('CAKAP')">
-        <div class="level-icon">🚀</div>
-        <h3>Level Cakap</h3>
-        <p>
-          Menghitung total, selisih, sisa barang, uang, dan menggunakan data untuk
-          menyelesaikan masalah.
-        </p>
-        <div class="level-meta" id="modalCakapMeta">Terkunci</div>
-      </button>
+        <button class="level-option" id="levelCakapBtn" onclick="pilihLevel('CAKAP')">
+          <div class="level-icon">🚀</div>
+          <h3>Level Cakap</h3>
+          <p>Menghitung total, selisih, sisa barang, uang, dan menggunakan data untuk menyelesaikan masalah.</p>
+          <div class="level-meta" id="modalCakapMeta">Terkunci</div>
+        </button>
 
-      <button class="level-option" id="levelMahirBtn" onclick="pilihLevel('MAHIR')">
-        <div class="level-icon">🏆</div>
-        <h3>Level Mahir</h3>
-        <p>
-          Soal multi-langkah, analisis ekonomi, perubahan data, dan pengambilan
-          keputusan berdasarkan informasi.
-        </p>
-        <div class="level-meta" id="modalMahirMeta">Terkunci</div>
-      </button>
+        <button class="level-option" id="levelMahirBtn" onclick="pilihLevel('MAHIR')">
+          <div class="level-icon">🏆</div>
+          <h3>Level Mahir</h3>
+          <p>Soal multi-langkah, analisis ekonomi, perubahan data, dan pengambilan keputusan berdasarkan informasi.</p>
+          <div class="level-meta" id="modalMahirMeta">Terkunci</div>
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
 <script>
 /* ============================================================
@@ -890,6 +857,7 @@ async function masukAplikasi(){
 
       idMurid = res.id_murid;
       localStorage.setItem(LS.ID,idMurid);
+      tampilkanProfil();
 
       progressData = res.progress;
       cacheProgress(progressData);
@@ -917,6 +885,11 @@ function tampilkanProfil(){
 
   document.getElementById('profileClass').textContent =
     localStorage.getItem(LS.CLASS) || '-';
+
+  const profileId = document.getElementById('profileId');
+  if(profileId){
+    profileId.textContent = localStorage.getItem(LS.ID) || 'Belum tersinkron';
+  }
 }
 
 function getDeviceId(){
