@@ -578,6 +578,15 @@
     .question{border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:18px}
     .q-meta{color:#e97400;font-size:13px;font-weight:900;margin-bottom:8px}
     .stimulus{background:#fff8e1;border-left:5px solid #ff9800;padding:14px;border-radius:12px;margin-bottom:13px;line-height:1.65}
+    .question-image-wrap{
+      margin:12px 0 15px;padding:10px;border:1px solid #dce7ef;border-radius:16px;
+      background:linear-gradient(145deg,#f8fbff,#ffffff);text-align:center;
+    }
+    .question-image-label{font-size:12px;font-weight:900;color:#526b82;margin-bottom:8px}
+    .question-image{
+      width:min(100%,620px);max-height:350px;object-fit:cover;border-radius:12px;
+      display:block;margin:0 auto;box-shadow:0 8px 20px rgba(13,64,111,.12);
+    }
     .q-text{font-weight:900;font-size:17px;line-height:1.6;margin-bottom:14px}
     .option{display:flex;align-items:flex-start;gap:10px;border:2px solid #eceff1;border-radius:12px;padding:12px;margin-bottom:9px;cursor:pointer;transition:.2s}
     .option:hover{border-color:#90caf9;background:#f7fcff}
@@ -678,7 +687,7 @@
     </nav>
 
     <img
-      src="https://sugenghidayat.github.io/pikto-ips/img/logo-pikto-ips.png"
+      src="img/logo-pikto-ips.png"
       alt="Logo PIKTO-IPS"
       class="top-logo"
       onerror="this.style.visibility='hidden';"
@@ -820,7 +829,7 @@
               <div class="progress-name"><strong style="color:#14943a">AWAL</strong><small>Kompetensi Dasar</small></div>
               <div class="status-col"><small>Status</small><span class="status-pill st-belum" id="statusAwal">BELUM</span></div>
               <div class="score-col"><small>Nilai</small><div class="score-value" id="scoreAwal">-</div></div>
-              <div class="ring active" id="ringAwal">0/5</div>
+              <div class="ring active" id="ringAwal">0/12</div>
             </div>
 
             <div class="progress-row">
@@ -828,7 +837,7 @@
               <div class="progress-name"><strong style="color:#0a64ce">CAKAP</strong><small>Kompetensi Menengah</small></div>
               <div class="status-col"><small>Status</small><span class="status-pill st-terkunci" id="statusCakap">TERKUNCI</span></div>
               <div class="score-col"><small>Nilai</small><div class="score-value" id="scoreCakap">-</div></div>
-              <div class="ring" id="ringCakap">0/5</div>
+              <div class="ring" id="ringCakap">0/12</div>
             </div>
 
             <div class="progress-row">
@@ -836,7 +845,7 @@
               <div class="progress-name"><strong style="color:#8241d6">MAHIR</strong><small>Kompetensi Tinggi</small></div>
               <div class="status-col"><small>Status</small><span class="status-pill st-terkunci" id="statusMahir">TERKUNCI</span></div>
               <div class="score-col"><small>Nilai</small><div class="score-value" id="scoreMahir">-</div></div>
-              <div class="ring" id="ringMahir">0/5</div>
+              <div class="ring" id="ringMahir">0/12</div>
             </div>
           </div>
 
@@ -1322,6 +1331,13 @@ function renderQuestions(){
           </div>
         ` : ''}
 
+        ${q.gambar_url ? `
+          <div class="question-image-wrap">
+            <div class="question-image-label">🖼️ Amati gambar berikut</div>
+            <img class="question-image" src="${escapeHtml(q.gambar_url)}" alt="Gambar stimulus soal ${index + 1}" loading="lazy">
+          </div>
+        ` : ''}
+
         <div class="q-text">
           ${escapeHtml(q.pertanyaan)}
         </div>
@@ -1675,18 +1691,18 @@ function updateRing(id,data,isActive,p){
   if(!el) return;
 
   if(data && data.status === 'LULUS'){
-    el.textContent = '5/5';
+    el.textContent = '12/12';
     el.classList.add('active');
     return;
   }
 
   if(isActive){
-    const total = Number(p.total_soal || 5);
+    const total = Number(p.total_soal || 12);
     const answered = Math.min(Number(p.jumlah_terjawab || 0),total);
     el.textContent = answered + '/' + total;
     el.classList.add('active');
   }else{
-    el.textContent = '0/5';
+    el.textContent = '0/12';
     el.classList.remove('active');
   }
 }
