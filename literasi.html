@@ -147,6 +147,40 @@
       background:#fff;line-height:1.6;
     }
 
+
+    .answer-area{
+      display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;
+    }
+    .answer-input{
+      flex:1;min-width:210px;padding:12px 14px;border:2px solid #dce6ed;
+      border-radius:11px;background:#fff;color:#263f59;font-weight:800;
+      outline:none;transition:.2s;
+    }
+    .answer-input:focus{
+      border-color:#0d6efd;
+      box-shadow:0 0 0 3px rgba(13,110,253,.10);
+    }
+    .answer-input.correct{
+      border-color:#198754;background:#eefaf3;color:#116b3b;
+    }
+    .answer-input.wrong{
+      border-color:#dc3545;background:#fff1f2;color:#a92532;
+    }
+    .answer-feedback{
+      width:100%;min-height:20px;font-size:13px;font-weight:900;line-height:1.45;
+    }
+    .answer-feedback.correct{color:#15803d}
+    .answer-feedback.wrong{color:#c62828}
+    .save-answer{
+      background:#0d6efd!important;color:#fff!important;
+    }
+    .save-answer.correct{
+      background:#198754!important;color:#fff!important;
+    }
+    .save-answer.wrong{
+      background:#dc3545!important;color:#fff!important;
+    }
+
     /* VIDEO SECTION */
     .video-section{
       background:
@@ -450,17 +484,65 @@
     </div>
   </section>
 
-  <section class="card" id="latihan">
+    <section class="card" id="latihan">
     <h2>✏️ Latihan Literasi</h2>
     <p class="subtitle">
-      Jawablah secara lisan atau tuliskan jawabanmu. Gunakan cerita dan piktogram di atas sebagai sumber informasi.
+      Jawablah berdasarkan cerita dan piktogram Pasar Desa Sukamaju. Ketik jawaban pada kotak
+      yang tersedia lalu tekan tombol <strong>Simpan</strong>. Jika jawaban benar tombol berubah
+      <strong style="color:#198754">hijau</strong>, sedangkan jika salah berubah
+      <strong style="color:#dc3545">merah</strong>.
     </p>
     <div class="exercise-list">
-      <div class="exercise"><strong>1.</strong> Apa ide pokok cerita Pasar Desa Sukamaju?</div>
-      <div class="exercise"><strong>2.</strong> Siapa yang menjual cabai di pasar?</div>
-      <div class="exercise"><strong>3.</strong> Mengapa pembeli datang ke pasar?</div>
-      <div class="exercise"><strong>4.</strong> Apa hubungan antara pedagang dan pembeli dalam kegiatan ekonomi?</div>
-      <div class="exercise"><strong>5.</strong> Kesimpulan apa yang dapat kamu buat tentang fungsi pasar bagi masyarakat?</div>
+      <div class="exercise">
+        <strong>1.</strong> Apa ide pokok cerita Pasar Desa Sukamaju?
+        <div class="answer-area">
+          <input class="answer-input" id="jawaban-literasi-1" type="text"
+                 placeholder="Ketik jawaban..." autocomplete="off">
+          <button class="btn save-answer" id="simpan-literasi-1" type="button"
+                  onclick="simpanJawabanLiterasi(1)">💾 Simpan</button>
+          <div class="answer-feedback" id="feedback-literasi-1"></div>
+        </div>
+      </div>
+      <div class="exercise">
+        <strong>2.</strong> Siapa yang menjual cabai di pasar?
+        <div class="answer-area">
+          <input class="answer-input" id="jawaban-literasi-2" type="text"
+                 placeholder="Ketik nama..." autocomplete="off">
+          <button class="btn save-answer" id="simpan-literasi-2" type="button"
+                  onclick="simpanJawabanLiterasi(2)">💾 Simpan</button>
+          <div class="answer-feedback" id="feedback-literasi-2"></div>
+        </div>
+      </div>
+      <div class="exercise">
+        <strong>3.</strong> Mengapa pembeli datang ke pasar?
+        <div class="answer-area">
+          <input class="answer-input" id="jawaban-literasi-3" type="text"
+                 placeholder="Ketik jawaban..." autocomplete="off">
+          <button class="btn save-answer" id="simpan-literasi-3" type="button"
+                  onclick="simpanJawabanLiterasi(3)">💾 Simpan</button>
+          <div class="answer-feedback" id="feedback-literasi-3"></div>
+        </div>
+      </div>
+      <div class="exercise">
+        <strong>4.</strong> Apa hubungan antara pedagang dan pembeli dalam kegiatan ekonomi?
+        <div class="answer-area">
+          <input class="answer-input" id="jawaban-literasi-4" type="text"
+                 placeholder="Ketik jawaban..." autocomplete="off">
+          <button class="btn save-answer" id="simpan-literasi-4" type="button"
+                  onclick="simpanJawabanLiterasi(4)">💾 Simpan</button>
+          <div class="answer-feedback" id="feedback-literasi-4"></div>
+        </div>
+      </div>
+      <div class="exercise">
+        <strong>5.</strong> Kesimpulan apa yang dapat kamu buat tentang fungsi pasar bagi masyarakat?
+        <div class="answer-area">
+          <input class="answer-input" id="jawaban-literasi-5" type="text"
+                 placeholder="Ketik jawaban..." autocomplete="off">
+          <button class="btn save-answer" id="simpan-literasi-5" type="button"
+                  onclick="simpanJawabanLiterasi(5)">💾 Simpan</button>
+          <div class="answer-feedback" id="feedback-literasi-5"></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -657,6 +739,163 @@
 
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
+
+  const KUNCI_LATIHAN_LITERASI = {
+    1:[
+      'kegiatan jual beli di pasar',
+      'kegiatan ekonomi di pasar',
+      'kegiatan jual beli antara pedagang dan pembeli',
+      'kegiatan jual beli antara pedagang dan pembeli di pasar'
+    ],
+    2:[
+      'pak hasan'
+    ],
+    3:[
+      'untuk membeli kebutuhan',
+      'untuk memenuhi kebutuhan',
+      'untuk memperoleh barang yang dibutuhkan',
+      'untuk memperoleh barang yang dibutuhkan keluarga',
+      'untuk membeli barang yang dibutuhkan'
+    ],
+    4:[
+      'pedagang menjual barang dan pembeli membeli barang',
+      'pedagang menjual dan pembeli membeli',
+      'pedagang menyediakan barang dan pembeli membeli',
+      'pedagang dan pembeli melakukan jual beli',
+      'saling membutuhkan dalam kegiatan jual beli'
+    ],
+    5:[
+      'pasar tempat jual beli',
+      'pasar membantu masyarakat memenuhi kebutuhan',
+      'pasar tempat masyarakat memenuhi kebutuhan',
+      'pasar mempertemukan penjual dan pembeli',
+      'pasar merupakan tempat penjual dan pembeli melakukan jual beli'
+    ]
+  };
+
+  function normalisasiJawabanLiterasi(value){
+    return String(value || '')
+      .toLowerCase()
+      .trim()
+      .replace(/[.,!?;:]/g,'')
+      .replace(/\s+/g,' ');
+  }
+
+  function cekKemiripanLiterasi(jawaban, daftarBenar){
+    const j = normalisasiJawabanLiterasi(jawaban);
+    if(!j) return false;
+
+    return daftarBenar.some(kunci=>{
+      const k = normalisasiJawabanLiterasi(kunci);
+      if(j === k) return true;
+      if(j.length >= 10 && (j.includes(k) || k.includes(j))) return true;
+
+      const kataJ = j.split(' ').filter(x=>x.length > 2);
+      const kataK = k.split(' ').filter(x=>x.length > 2);
+      if(!kataK.length) return false;
+
+      const cocok = kataK.filter(kata=>kataJ.includes(kata)).length;
+      return cocok / kataK.length >= 0.7;
+    });
+  }
+
+  function simpanJawabanLiterasi(no){
+    const input = document.getElementById('jawaban-literasi-' + no);
+    const button = document.getElementById('simpan-literasi-' + no);
+    const feedback = document.getElementById('feedback-literasi-' + no);
+
+    const value = normalisasiJawabanLiterasi(input.value);
+
+    input.classList.remove('correct','wrong');
+    button.classList.remove('correct','wrong');
+    feedback.classList.remove('correct','wrong');
+
+    if(!value){
+      feedback.textContent = '⚠️ Isi jawaban terlebih dahulu.';
+      feedback.classList.add('wrong');
+      input.focus();
+      return;
+    }
+
+    const benar = cekKemiripanLiterasi(value, KUNCI_LATIHAN_LITERASI[no]);
+
+    localStorage.setItem('pikto_literasi_latihan_' + no, input.value.trim());
+    localStorage.setItem(
+      'pikto_literasi_latihan_' + no + '_status',
+      benar ? 'benar' : 'salah'
+    );
+
+    if(benar){
+      input.classList.add('correct');
+      button.classList.add('correct');
+      feedback.classList.add('correct');
+      button.textContent = '✅ Benar';
+      feedback.textContent = 'Hebat! Jawabanmu benar.';
+    }else{
+      input.classList.add('wrong');
+      button.classList.add('wrong');
+      feedback.classList.add('wrong');
+      button.textContent = '❌ Salah';
+      feedback.textContent = 'Jawaban belum tepat. Baca kembali cerita dan informasi pada halaman.';
+    }
+  }
+
+  function pulihkanLatihanLiterasi(){
+    for(let no=1; no<=5; no++){
+      const saved = localStorage.getItem('pikto_literasi_latihan_' + no);
+      const status = localStorage.getItem('pikto_literasi_latihan_' + no + '_status');
+
+      if(saved === null) continue;
+
+      const input = document.getElementById('jawaban-literasi-' + no);
+      const button = document.getElementById('simpan-literasi-' + no);
+      const feedback = document.getElementById('feedback-literasi-' + no);
+
+      input.value = saved;
+
+      if(status === 'benar'){
+        input.classList.add('correct');
+        button.classList.add('correct');
+        feedback.classList.add('correct');
+        button.textContent = '✅ Benar';
+        feedback.textContent = 'Hebat! Jawabanmu benar.';
+      }else if(status === 'salah'){
+        input.classList.add('wrong');
+        button.classList.add('wrong');
+        feedback.classList.add('wrong');
+        button.textContent = '❌ Salah';
+        feedback.textContent = 'Jawaban belum tepat. Baca kembali cerita dan informasi pada halaman.';
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    pulihkanLatihanLiterasi();
+
+    for(let no=1; no<=5; no++){
+      const input = document.getElementById('jawaban-literasi-' + no);
+      if(!input) continue;
+
+      input.addEventListener('keydown',event=>{
+        if(event.key === 'Enter'){
+          event.preventDefault();
+          simpanJawabanLiterasi(no);
+        }
+      });
+
+      input.addEventListener('input',()=>{
+        const button = document.getElementById('simpan-literasi-' + no);
+        const feedback = document.getElementById('feedback-literasi-' + no);
+
+        input.classList.remove('correct','wrong');
+        button.classList.remove('correct','wrong');
+        button.textContent = '💾 Simpan';
+        feedback.textContent = '';
+        feedback.classList.remove('correct','wrong');
+      });
+    }
+  });
+
   const VIDEO_DATA = [
     {
       id: 'yA1Ftjg0JKI',
