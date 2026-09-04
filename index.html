@@ -1000,6 +1000,106 @@ function sessionKey(level){
   return 'pikto_session_' + level;
 }
 
+
+/* ============================================================
+   RESET OTOMATIS IDENTITAS MURID
+   Jika ID murid sudah dihapus dari database, browser kembali
+   ke layar awal Nama + Kelas dan data tantangan lokal dibersihkan.
+============================================================ */
+
+function isStudentNotFoundResponse(res){
+  if(!res) return false;
+
+  const code = String(res.code || '').toUpperCase();
+  const message = String(res.message || '').toLowerCase();
+
+  return (
+    code === 'STUDENT_NOT_FOUND' ||
+    message.includes('data murid tidak ditemukan') ||
+    message.includes('data progres murid tidak ditemukan') ||
+    message.includes('murid tidak ditemukan')
+  );
+}
+
+function bersihkanDataMuridLokal(){
+  // Identitas murid
+  localStorage.removeItem(LS.ID);
+  localStorage.removeItem(LS.NAME);
+  localStorage.removeItem(LS.CLASS);
+
+  // Progres & antrean sinkronisasi
+  localStorage.removeItem(LS.PROGRESS);
+  localStorage.removeItem(LS.QUEUE);
+
+  // Jawaban, cache soal, dan sesi tantangan tiap level
+  ['AWAL','CAKAP','MAHIR'].forEach(level=>{
+    localStorage.removeItem(answerKey(level));
+    localStorage.removeItem(questionsKey(level));
+    localStorage.removeItem(sessionKey(level));
+  });
+
+  // Device ID sengaja dipertahankan supaya perangkat tetap dikenali,
+  // tetapi murid harus memasukkan Nama dan Kelas kembali.
+}
+
+function kembaliKeHalamanIdentitas(pesan){
+  bersihkanDataMuridLokal();
+
+  currentLevel = '';
+  currentQuestions = [];
+  currentAnswers = {};
+  currentSessionId = '';
+  currentStartTime = '';
+  progressData = null;
+
+  const namaInput = document.getElementById('nama');
+  const kelasInput = document.getElementById('kelas');
+
+  if(namaInput) namaInput.value = '';
+  if(kelasInput) kelasInput.value = '';
+
+  const identityCard = document.getElementById('identityCard');
+  const appArea = document.getElementById('appArea');
+  const challengeArea = document.getElementById('challengeArea');
+  const levelModal = document.getElementById('levelModal');
+
+  if(identityCard) identityCard.classList.remove('hidden');
+  if(appArea) appArea.classList.add('hidden');
+  if(challengeArea) challengeArea.classList.add('hidden');
+  if(levelModal) levelModal.classList.add('hidden');
+
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  if(pesan){
+    setTimeout(()=>alert(pesan),120);
+  }
+}
+
+async function validasiMuridDatabase(idMurid){
+  if(!idMurid || !apiConfigured() || !navigator.onLine){
+    return {valid:true, skipped:true};
+  }
+
+  const res = await api({
+    action:'getProgress',
+    id_murid:idMurid
+  });
+
+  if(isStudentNotFoundResponse(res)){
+    kembaliKeHalamanIdentitas(
+      'Data murid sudah tidak ditemukan di Database PIKTO-IPS. Silakan tulis nama dan pilih kelas kembali.'
+    );
+    return {valid:false, reset:true};
+  }
+
+  if(!res.success){
+    throw new Error(res.message || 'Gagal memeriksa data murid.');
+  }
+
+  return {valid:true, progress:res.progress};
+}
+
+
 /* ============================================================
    START / IDENTITY
 ============================================================ */
@@ -1113,9 +1213,18 @@ async function bukaPemilihanLevel(){
         id_murid:localStorage.getItem(LS.ID)
       });
 
+      if(isStudentNotFoundResponse(res)){
+        kembaliKeHalamanIdentitas(
+          'Data murid sudah tidak ditemukan di Database PIKTO-IPS. Silakan masuk kembali.'
+        );
+        return;
+      }
+
       if(res.success){
         progressData = res.progress;
         cacheProgress(progressData);
+      }else{
+        throw new Error(res.message || 'Gagal memuat progres.');
       }
     }catch(err){
       loadProgressCache();
@@ -1938,6 +2047,13 @@ window.addEventListener('online',async()=>{
         action:'getProgress',
         id_murid:localStorage.getItem(LS.ID)
       });
+      if(isStudentNotFoundResponse(res)){
+        kembaliKeHalamanIdentitas(
+          'Data murid sudah dihapus dari Database PIKTO-IPS. Silakan tulis nama dan pilih kelas kembali.'
+        );
+        return;
+      }
+
       if(res.success){
         progressData = res.progress;
         cacheProgress(progressData);
@@ -2000,30 +2116,63 @@ window.addEventListener('load',async()=>{
   loadProgressCache();
 
   if(nama && kelas && idMurid){
-    document.getElementById('identityCard').classList.add('hidden');
-    document.getElementById('appArea').classList.remove('hidden');
-
-    tampilkanProfil();
-    renderProgress();
-    renderLeaderboard([]);
-
+    /*
+      Saat online, database menjadi sumber kebenaran.
+      Dashboard baru dipertahankan jika ID murid masih ada di database.
+    */
     if(apiConfigured() && navigator.onLine){
       try{
-        await syncQueue();
+        const validasi = await validasiMuridDatabase(idMurid);
 
-        const res = await api({
-          action:'getProgress',
-          id_murid:idMurid
-        });
-
-        if(res.success){
-          progressData = res.progress;
-          cacheProgress(progressData);
-          renderProgress();
+        if(!validasi.valid){
+          return;
         }
+
+        if(validasi.progress){
+          progressData = validasi.progress;
+          cacheProgress(progressData);
+        }
+
+        document.getElementById('identityCard').classList.add('hidden');
+        document.getElementById('appArea').classList.remove('hidden');
+
+        tampilkanProfil();
+        renderProgress();
+        renderLeaderboard([]);
+
+        await syncQueue();
         await loadLeaderboard();
-      }catch(err){}
+
+      }catch(err){
+        /*
+          Jika hanya internet/server bermasalah, data lokal TIDAK dihapus.
+          Murid tetap dapat memakai mode lokal/offline.
+        */
+        document.getElementById('identityCard').classList.add('hidden');
+        document.getElementById('appArea').classList.remove('hidden');
+
+        tampilkanProfil();
+        renderProgress();
+        renderLeaderboard([]);
+
+        showSync(
+          'Data lokal aktif. Database belum dapat diperiksa: ' + err.message,
+          false
+        );
+      }
+    }else{
+      // Mode offline: pertahankan identitas lokal.
+      document.getElementById('identityCard').classList.add('hidden');
+      document.getElementById('appArea').classList.remove('hidden');
+
+      tampilkanProfil();
+      renderProgress();
+      renderLeaderboard([]);
     }
+  }else{
+    // Identitas tidak lengkap = selalu tampilkan halaman awal.
+    document.getElementById('identityCard').classList.remove('hidden');
+    document.getElementById('appArea').classList.add('hidden');
   }
 });
 </script>
