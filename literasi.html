@@ -1,528 +1,1081 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Literasi IPS | PIKTO-IPS</title>
-
   <style>
-    :root {
-      --primary: #1565c0;
-      --primary-dark: #0d47a1;
-      --secondary: #ff9800;
-      --success: #2e7d32;
-      --bg: #f4f8fc;
-      --card: #ffffff;
-      --text: #263238;
-      --muted: #607d8b;
-      --border: #dbe5ee;
+    :root{
+      --blue:#0b5ed7;
+      --blue-dark:#083b78;
+      --blue-soft:#eaf4ff;
+      --green:#198754;
+      --green-soft:#eaf8ef;
+      --orange:#ff9800;
+      --orange-soft:#fff4df;
+      --purple:#7b4bc2;
+      --red:#d93c3c;
+      --text:#17324d;
+      --muted:#61758b;
+      --line:#dbe6ef;
+      --card:#ffffff;
+      --shadow:0 12px 30px rgba(31,72,110,.10);
+      --radius:20px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Trebuchet MS",Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 10%,rgba(77,171,247,.14),transparent 28%),
+        radial-gradient(circle at 85% 80%,rgba(81,207,102,.13),transparent 25%),
+        linear-gradient(135deg,#eef8ff,#f9fcff 52%,#f2fff3);
     }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #e3f2fd, #fff8e1);
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.7;
+    button,a{font:inherit}
+    button{cursor:pointer}
+    a{text-decoration:none;color:inherit}
+    .hidden{display:none!important}
+
+    .topbar{
+      min-height:92px;
+      padding:14px 28px;
+      background:linear-gradient(90deg,#073567,#074b91);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      gap:24px;
+      box-shadow:0 5px 18px rgba(4,40,78,.18);
+    }
+    .brand{display:flex;align-items:center;gap:14px;min-width:0}
+    .brand img{
+      width:82px;height:82px;object-fit:contain;
+      filter:drop-shadow(0 5px 6px rgba(0,0,0,.18));
+    }
+    .brand h1{margin:0;font-size:29px;line-height:1.05}
+    .brand p{margin:5px 0 0;font-size:13px;opacity:.92}
+    .nav{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+    .nav a{
+      color:#fff;font-weight:900;padding:10px 14px;border-radius:10px;
+      background:rgba(255,255,255,.08);
+    }
+    .nav a:hover{background:rgba(255,255,255,.16)}
+
+    .container{width:min(1180px,94%);margin:24px auto 42px}
+    .hero{
+      padding:28px;
+      border-radius:24px;
+      background:linear-gradient(135deg,#0f69d8,#0b4fa3);
+      color:#fff;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::after{
+      content:"📖";
+      position:absolute;
+      right:28px;bottom:-22px;
+      font-size:126px;opacity:.12;transform:rotate(-7deg);
+    }
+    .hero .badge{
+      display:inline-block;background:#fff;color:#0b4fa3;
+      padding:7px 12px;border-radius:999px;font-weight:900;font-size:12px;
+    }
+    .hero h2{font-size:34px;margin:13px 0 8px}
+    .hero p{max-width:780px;line-height:1.7;margin:0;font-size:16px}
+
+    .card{
+      background:rgba(255,255,255,.96);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:24px;
+      margin-top:20px;
+      box-shadow:var(--shadow);
+    }
+    .card h2{margin:0 0 8px;color:#0b4fa3;font-size:25px}
+    .card h3{color:#16436f}
+    .subtitle{margin:0 0 18px;color:var(--muted);line-height:1.65}
+    .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .info-box{
+      border:1px solid #dce7ef;border-radius:16px;padding:18px;
+      background:#fbfdff;
+    }
+    .info-box .icon{font-size:34px}
+    .info-box h3{margin:8px 0 6px}
+    .info-box p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+
+    .story{
+      background:linear-gradient(135deg,#fff8e7,#fff);
+      border-left:6px solid var(--orange);
+    }
+    .story p{line-height:1.8}
+    .highlight{
+      padding:14px 16px;border-radius:14px;background:#edf7ff;
+      border:1px solid #cfe5f7;margin:14px 0;line-height:1.7;
     }
 
-    .container {
-      width: min(1100px, 94%);
-      margin: auto;
-      padding: 24px 0 50px;
+    .pictogram{
+      display:grid;grid-template-columns:180px 1fr;gap:8px 16px;
+      margin-top:14px;align-items:center;
+    }
+    .pic-label{font-weight:900}
+    .pics{font-size:27px;letter-spacing:3px}
+    .legend{
+      margin-top:14px;padding:11px 14px;border-radius:12px;
+      background:#fff7e8;border:1px solid #ffe1a9;font-weight:900;
     }
 
-    .header {
-      background: linear-gradient(135deg, var(--primary), #0288d1);
-      color: white;
-      border-radius: 24px;
-      padding: 30px;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
-      margin-bottom: 24px;
+    .steps{counter-reset:step;display:grid;gap:11px}
+    .step{
+      position:relative;padding:14px 16px 14px 56px;
+      border:1px solid #dfe8ef;border-radius:14px;background:#fff;
+      line-height:1.55;
+    }
+    .step::before{
+      counter-increment:step;content:counter(step);
+      position:absolute;left:14px;top:12px;width:30px;height:30px;
+      border-radius:50%;display:flex;align-items:center;justify-content:center;
+      background:var(--blue);color:#fff;font-weight:900;
     }
 
-    .header h1 {
-      font-size: 34px;
-      margin-bottom: 10px;
+    .exercise-list{display:grid;gap:12px;margin-top:16px}
+    .exercise{
+      padding:14px 16px;border:1px solid #dce6ed;border-radius:14px;
+      background:#fff;line-height:1.6;
     }
 
-    .header p {
-      max-width: 760px;
+    /* VIDEO SECTION */
+    .video-section{
+      background:
+        radial-gradient(circle at 100% 0,rgba(255,193,7,.12),transparent 25%),
+        #fff;
+    }
+    .video-title-row{
+      display:flex;align-items:center;gap:14px;margin-bottom:8px;
+    }
+    .video-title-icon{
+      width:52px;height:52px;border-radius:16px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:28px;background:#ffeded;color:#d71920;
+    }
+    .video-intro{
+      padding:14px 16px;border-radius:14px;background:#eef7ff;
+      border:1px solid #d2e8fa;color:#234a70;line-height:1.65;margin:16px 0 18px;
+    }
+    .video-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .video-card{
+      border:1px solid #dce6ee;border-radius:18px;background:#fff;overflow:hidden;
+      box-shadow:0 8px 20px rgba(36,74,107,.07);
+    }
+    .video-card-head{
+      padding:17px 18px 12px;
+      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+    }
+    .video-card-head h3{margin:0 0 5px;font-size:19px}
+    .video-source{font-size:12px;color:var(--muted)}
+    .watch-status{
+      flex-shrink:0;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:900;
+      background:#eef1f4;color:#5d6a78;
+    }
+    .watch-status.done{background:#e8f8ed;color:#087c2d}
+    .player-shell{
+      position:relative;
+      aspect-ratio:16/9;
+      background:#071b2e;
+      overflow:hidden;
+    }
+    .yt-player{position:absolute;inset:0;width:100%;height:100%}
+    .player-lock{
+      position:absolute;inset:0;z-index:3;
+      display:flex;align-items:center;justify-content:center;
+      padding:18px;background:linear-gradient(135deg,rgba(4,29,54,.92),rgba(9,61,116,.88));
+      color:#fff;text-align:center;
+    }
+    .player-lock-inner{max-width:360px}
+    .player-lock .play-icon{font-size:48px;margin-bottom:8px}
+    .player-lock h4{font-size:18px;margin:0 0 7px}
+    .player-lock p{font-size:12px;line-height:1.5;opacity:.9;margin:0 0 13px}
+    .progress-wrap{padding:12px 18px 0}
+    .progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px}
+    .progress-track{height:9px;border-radius:999px;background:#e6ebef;overflow:hidden}
+    .progress-fill{height:100%;width:0;background:linear-gradient(90deg,#0d6efd,#20c997);transition:.3s}
+    .storyline{padding:16px 18px 18px}
+    .storyline h4{margin:0 0 8px;color:#0b4fa3}
+    .storyline ol{margin:0;padding-left:20px;color:#425b75}
+    .storyline li{margin:6px 0;line-height:1.5}
+    .understanding{
+      margin:0 18px 18px;padding:15px;border-radius:14px;
+      border:1px solid #d8e4ed;background:#f8fbfd;text-align:center;
+    }
+    .understanding h4{margin:0 0 7px;font-size:17px}
+    .understanding p{font-size:12px;color:var(--muted);margin:0 0 12px}
+    .btn-row{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+    .btn{
+      border:0;border-radius:10px;padding:11px 15px;font-weight:900;
+      display:inline-flex;align-items:center;justify-content:center;gap:7px;
+    }
+    .btn:disabled{opacity:.48;cursor:not-allowed}
+    .btn-blue{background:#0d6efd;color:#fff}
+    .btn-green{background:#198754;color:#fff}
+    .btn-red{background:#dc3545;color:#fff}
+    .btn-light{background:#edf1f4;color:#28445f}
+    .btn-orange{background:#ff9800;color:#fff}
+
+    .video-complete{
+      margin-top:18px;border-radius:15px;padding:16px;
+      background:#fff7df;border:1px solid #ffe0a3;
+    }
+    .video-complete strong{display:block;color:#825a00;margin-bottom:5px}
+    .video-complete p{margin:0;color:#725d2a;font-size:13px;line-height:1.6}
+    .complete-bar{
+      margin-top:10px;height:11px;border-radius:999px;background:#f1e5bd;overflow:hidden;
+    }
+    .complete-fill{height:100%;width:0;background:linear-gradient(90deg,#ffb300,#29a94a);transition:.35s}
+
+    .next-lock{
+      text-align:center;margin-top:18px;padding:18px;border-radius:16px;
+      border:1px dashed #b9c9d7;background:#fbfdff;
+    }
+    .next-lock p{margin:0 0 12px;color:var(--muted);line-height:1.55}
+
+    /* MODAL INTERAKTIF */
+    .modal{
+      position:fixed;inset:0;z-index:2000;
+      background:rgba(3,22,42,.78);
+      display:flex;align-items:center;justify-content:center;padding:18px;
+    }
+    .modal-box{
+      width:min(920px,100%);max-height:94vh;overflow:auto;
+      background:#fff;border-radius:24px;padding:20px;
+      box-shadow:0 24px 70px rgba(0,0,0,.30);
+    }
+    .modal-head{
+      display:flex;justify-content:space-between;align-items:flex-start;gap:14px;
+      margin-bottom:14px;
+    }
+    .modal-head h3{margin:0;color:#0b4fa3;font-size:22px}
+    .modal-head p{margin:5px 0 0;color:var(--muted);font-size:13px}
+    .close-btn{
+      width:38px;height:38px;border:0;border-radius:50%;
+      background:#edf1f4;font-weight:900;color:#36516e;
+    }
+    .interactive-player-wrap{
+      position:relative;aspect-ratio:16/9;background:#061b2f;border-radius:16px;overflow:hidden;
+    }
+    #interactivePlayer{position:absolute;inset:0;width:100%;height:100%}
+    .question-overlay{
+      position:absolute;inset:0;z-index:5;
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(5,27,48,.88);padding:20px;
+    }
+    .question-card{
+      width:min(620px,100%);background:#fff;border-radius:20px;padding:22px;
+      box-shadow:0 16px 40px rgba(0,0,0,.2);
+    }
+    .question-number{
+      display:inline-block;padding:5px 9px;border-radius:999px;
+      background:#eaf4ff;color:#0b5ed7;font-size:11px;font-weight:900;
+      margin-bottom:9px;
+    }
+    .question-card h4{font-size:20px;line-height:1.5;margin:0 0 14px;color:#17324d}
+    .quiz-options{display:grid;gap:9px}
+    .quiz-option{
+      width:100%;text-align:left;padding:12px 13px;border-radius:11px;
+      border:2px solid #e1e8ee;background:#fff;color:#263f59;font-weight:800;
+    }
+    .quiz-option:hover{border-color:#83bafa;background:#f5faff}
+    .quiz-feedback{
+      min-height:24px;margin-top:11px;font-size:13px;font-weight:900;line-height:1.5;
+    }
+    .feedback-ok{color:#15803d}
+    .feedback-bad{color:#c62828}
+    .interactive-status{
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      padding:12px 4px 0;color:#536b82;font-size:12px;font-weight:900;
     }
 
-    .badge {
-      display: inline-block;
-      background: var(--secondary);
-      color: white;
-      padding: 6px 13px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 12px;
+    footer{
+      text-align:center;color:#60758a;font-size:12px;line-height:1.7;margin-top:26px;
     }
 
-    .card {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 24px;
-      margin-bottom: 22px;
-      box-shadow: 0 8px 25px rgba(50,80,110,0.1);
-      border: 1px solid var(--border);
+    @media(max-width:850px){
+      .info-grid,.video-grid{grid-template-columns:1fr}
+      .pictogram{grid-template-columns:135px 1fr}
     }
-
-    h2 {
-      color: var(--primary-dark);
-      margin-bottom: 14px;
-    }
-
-    h3 {
-      color: var(--primary);
-      margin-top: 18px;
-      margin-bottom: 8px;
-    }
-
-    .highlight {
-      background: #fff8e1;
-      border-left: 6px solid var(--secondary);
-      padding: 18px;
-      border-radius: 14px;
-      margin: 15px 0;
-    }
-
-    .info {
-      background: #e8f5e9;
-      border-left: 6px solid var(--success);
-      padding: 18px;
-      border-radius: 14px;
-      margin: 15px 0;
-    }
-
-    .example {
-      background: #e3f2fd;
-      border-radius: 14px;
-      padding: 18px;
-      margin: 15px 0;
-    }
-
-    ul {
-      margin-left: 24px;
-      margin-top: 10px;
-    }
-
-    li {
-      margin-bottom: 7px;
-    }
-
-    .pictogram-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    .pictogram-table th,
-    .pictogram-table td {
-      border: 1px solid var(--border);
-      padding: 14px;
-      text-align: left;
-    }
-
-    .pictogram-table th {
-      background: #e3f2fd;
-      color: var(--primary-dark);
-    }
-
-    .icons {
-      font-size: 28px;
-      letter-spacing: 5px;
-    }
-
-    .question-box {
-      border: 2px dashed #90caf9;
-      border-radius: 16px;
-      padding: 18px;
-      margin-top: 16px;
-      background: #fbfdff;
-    }
-
-    .btn-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .btn {
-      text-decoration: none;
-      padding: 12px 18px;
-      border-radius: 12px;
-      font-weight: bold;
-      display: inline-block;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-    }
-
-    .btn-warning {
-      background: var(--secondary);
-      color: white;
-    }
-
-    .footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 20px;
-    }
-
-    @media(max-width:700px){
-      .header h1{
-        font-size:27px;
-      }
-
-      .card{
-        padding:18px;
-      }
-
-      .pictogram-table{
-        font-size:14px;
-      }
+    @media(max-width:650px){
+      .topbar{padding:11px 14px;align-items:flex-start}
+      .brand img{width:64px;height:64px}
+      .brand h1{font-size:22px}
+      .nav{display:none}
+      .container{width:94%;margin-top:16px}
+      .hero,.card{padding:18px}
+      .hero h2{font-size:28px}
+      .pictogram{grid-template-columns:1fr}
+      .pics{margin-bottom:7px}
+      .modal{padding:8px}
+      .modal-box{padding:13px;border-radius:17px}
+      .question-card{padding:16px}
     }
   </style>
 </head>
-
 <body>
 
-  <div class="container">
+<header class="topbar">
+  <div class="brand">
+    <img src="img/logo-pikto-ips.png" alt="Logo PIKTO-IPS" onerror="this.style.display='none'">
+    <div>
+      <h1>📖 LITERASI IPS</h1>
+      <p>Belajar memahami informasi dalam kehidupan masyarakat</p>
+    </div>
+  </div>
+  <nav class="nav">
+    <a href="index.html">🏠 Beranda</a>
+    <a href="#latihan">✏️ Latihan</a>
+    <a href="#videoInteraktif">🎬 Video Interaktif</a>
+    <a href="numerasi.html">🔢 Numerasi</a>
+  </nav>
+</header>
 
-    <header class="header">
-      <span class="badge">📖 LITERASI IPS</span>
-      <h1>Belajar Memahami Informasi</h1>
-      <p>
-        Pada halaman ini kita akan belajar membaca cerita,
-        menemukan informasi penting, memahami kegiatan masyarakat,
-        membaca piktogram, dan mengambil kesimpulan dari informasi yang kita temukan.
-      </p>
-    </header>
+<main class="container">
 
-    <section class="card">
-      <h2>🌟 Apa Itu Literasi?</h2>
+  <section class="hero">
+    <span class="badge">PIKTO-IPS • KELAS 4 SD</span>
+    <h2>Literasi dalam Pembelajaran IPS</h2>
+    <p>
+      Literasi IPS adalah kemampuan membaca, memahami, menemukan informasi,
+      menghubungkan fakta, dan membuat kesimpulan tentang kehidupan masyarakat.
+      Informasi dapat berasal dari cerita, gambar, simbol, tabel, peta, grafik, piktogram, maupun video.
+    </p>
+  </section>
 
-      <p>
-        Literasi adalah kemampuan untuk membaca, memahami, menemukan informasi,
-        menghubungkan informasi, kemudian menggunakan informasi tersebut untuk
-        menjawab pertanyaan atau mengambil keputusan.
-      </p>
-
-      <div class="highlight">
-        <strong>Ingat!</strong><br>
-        Literasi bukan hanya bisa membaca tulisan. Literasi juga berarti
-        memahami arti dari tulisan, gambar, simbol, tabel, peta, grafik,
-        dan informasi yang kita lihat.
+  <section class="card">
+    <h2>📚 Apa Itu Literasi?</h2>
+    <p class="subtitle">
+      Literasi bukan hanya kemampuan membaca tulisan. Murid juga perlu memahami makna informasi
+      dan menggunakannya untuk menjawab pertanyaan atau mengambil keputusan.
+    </p>
+    <div class="info-grid">
+      <div class="info-box">
+        <div class="icon">🔎</div>
+        <h3>Menemukan Informasi</h3>
+        <p>Mencari fakta penting seperti siapa, apa, kapan, di mana, mengapa, dan bagaimana.</p>
       </div>
-    </section>
-
-    <section class="card">
-      <h2>🏘️ Literasi dalam Pelajaran IPS</h2>
-
-      <p>
-        Dalam pelajaran IPS, kita mempelajari kehidupan manusia dan masyarakat.
-        Kita belajar tentang keluarga, lingkungan, kegiatan ekonomi,
-        kebutuhan manusia, pekerjaan, budaya, dan hubungan antarmanusia.
-      </p>
-
-      <h3>Contoh informasi IPS yang sering kita temui:</h3>
-
-      <ul>
-        <li>cerita kegiatan masyarakat di pasar;</li>
-        <li>data pekerjaan penduduk;</li>
-        <li>jumlah hasil pertanian;</li>
-        <li>kegiatan jual beli;</li>
-        <li>kebutuhan sehari-hari;</li>
-        <li>informasi tentang budaya daerah;</li>
-        <li>peta lingkungan;</li>
-        <li>tabel jumlah penduduk;</li>
-        <li>grafik hasil produksi;</li>
-        <li>piktogram kegiatan ekonomi.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>📚 Membaca Cerita IPS dengan Benar</h2>
-
-      <p>
-        Ketika membaca cerita IPS, jangan terburu-buru.
-        Perhatikan siapa yang diceritakan, apa yang dilakukan,
-        di mana kegiatan berlangsung, dan mengapa kegiatan itu dilakukan.
-      </p>
-
-      <div class="info">
-        Gunakan pertanyaan berikut ketika membaca:
-        <ul>
-          <li>Siapa yang terlibat?</li>
-          <li>Apa kegiatan yang dilakukan?</li>
-          <li>Di mana kegiatan berlangsung?</li>
-          <li>Kapan kegiatan dilakukan?</li>
-          <li>Mengapa kegiatan tersebut dilakukan?</li>
-          <li>Apa informasi penting dalam cerita?</li>
-        </ul>
+      <div class="info-box">
+        <div class="icon">🧠</div>
+        <h3>Memahami Makna</h3>
+        <p>Menghubungkan informasi yang tertulis dengan pengetahuan dan situasi kehidupan sehari-hari.</p>
       </div>
-    </section>
-
-    <section class="card">
-      <h2>🛒 Contoh Cerita: Pasar Desa Sukamaju</h2>
-
-      <div class="example">
-        Setiap hari Minggu, masyarakat Desa Sukamaju melakukan kegiatan
-        jual beli di pasar desa. Para petani membawa hasil pertanian
-        seperti tomat, jagung, cabai, dan singkong.
-        Pedagang menjual hasil pertanian tersebut kepada masyarakat.
-        Kegiatan ini membantu petani memperoleh penghasilan dan membantu
-        masyarakat mendapatkan bahan makanan.
+      <div class="info-box">
+        <div class="icon">💡</div>
+        <h3>Membuat Kesimpulan</h3>
+        <p>Menentukan pesan atau keputusan yang masuk akal berdasarkan informasi yang tersedia.</p>
       </div>
+    </div>
+  </section>
 
-      <h3>Apa informasi penting dari cerita tersebut?</h3>
+  <section class="card">
+    <h2>🌍 Literasi dalam Pelajaran IPS</h2>
+    <p class="subtitle">
+      Pada pelajaran IPS, literasi membantu kita memahami kegiatan manusia dalam memenuhi kebutuhan,
+      bekerja, berinteraksi, menjaga lingkungan, dan melakukan kegiatan ekonomi.
+    </p>
+    <div class="highlight">
+      Contoh sumber literasi IPS: cerita tentang pasar, peta wilayah, tabel hasil panen,
+      piktogram barang dagangan, poster budaya, dan video kegiatan masyarakat.
+    </div>
+  </section>
 
-      <ul>
-        <li>Kegiatan terjadi di pasar desa.</li>
-        <li>Kegiatan yang dilakukan adalah jual beli.</li>
-        <li>Petani membawa hasil pertanian.</li>
-        <li>Masyarakat membeli barang yang dibutuhkan.</li>
-        <li>Petani mendapatkan penghasilan dari hasil penjualan.</li>
-      </ul>
-    </section>
+  <section class="card story">
+    <h2>🛒 Cerita IPS: Pasar Desa Sukamaju</h2>
+    <p>
+      Setiap pagi, Pasar Desa Sukamaju ramai dikunjungi warga. Bu Sari menjual tomat,
+      Pak Budi menjual jagung, Pak Hasan menjual cabai, dan Bu Rina menjual singkong.
+      Para pedagang membawa hasil kebun mereka untuk dijual kepada pembeli.
+      Pembeli datang untuk memperoleh barang yang dibutuhkan keluarga.
+      Kegiatan di pasar menunjukkan adanya hubungan antara penjual dan pembeli dalam kegiatan ekonomi.
+    </p>
 
-    <section class="card">
-      <h2>💡 Menemukan Ide Pokok</h2>
+    <div class="pictogram">
+      <div class="pic-label">Bu Sari — Tomat</div><div class="pics">🧺 🧺 🧺 🧺</div>
+      <div class="pic-label">Pak Budi — Jagung</div><div class="pics">🧺 🧺 🧺</div>
+      <div class="pic-label">Pak Hasan — Cabai</div><div class="pics">🧺 🧺 🧺 🧺 🧺</div>
+      <div class="pic-label">Bu Rina — Singkong</div><div class="pics">🧺 🧺</div>
+    </div>
+    <div class="legend">Keterangan: 1 🧺 = 2 keranjang barang.</div>
+  </section>
 
-      <p>
-        Ide pokok adalah gagasan utama yang dibahas dalam sebuah paragraf.
-        Untuk menemukan ide pokok, tanyakan:
-      </p>
+  <section class="card">
+    <h2>🎯 Menemukan Ide Pokok</h2>
+    <p class="subtitle">
+      Ide pokok adalah gagasan utama yang dibicarakan dalam sebuah paragraf atau cerita.
+    </p>
+    <div class="highlight">
+      Ide pokok cerita Pasar Desa Sukamaju adalah: <strong>kegiatan jual beli antara pedagang
+      dan pembeli di pasar sebagai bagian dari kegiatan ekonomi masyarakat.</strong>
+    </div>
+  </section>
 
-      <div class="highlight">
-        “Paragraf ini paling banyak membahas tentang apa?”
+  <section class="card">
+    <h2>📝 Informasi Tersurat dan Tersirat</h2>
+    <div class="info-grid">
+      <div class="info-box">
+        <div class="icon">📌</div>
+        <h3>Tersurat</h3>
+        <p>Informasi yang disebutkan langsung. Contoh: Bu Sari menjual tomat.</p>
       </div>
-
-      <div class="example">
-        <strong>Contoh:</strong><br>
-        “Setiap hari Minggu, masyarakat Desa Sukamaju melakukan
-        kegiatan jual beli di pasar desa. Para petani membawa hasil
-        pertanian untuk dijual.”
-
-        <br><br>
-
-        <strong>Ide pokok:</strong><br>
-        Kegiatan jual beli masyarakat Desa Sukamaju di pasar desa.
+      <div class="info-box">
+        <div class="icon">💭</div>
+        <h3>Tersirat</h3>
+        <p>Informasi yang disimpulkan. Contoh: masyarakat membutuhkan pasar untuk memenuhi kebutuhan.</p>
       </div>
-    </section>
-
-    <section class="card">
-      <h2>🔎 Menemukan Informasi Tersurat</h2>
-
-      <p>
-        Informasi tersurat adalah informasi yang tertulis langsung dalam teks.
-        Kita dapat menemukan jawabannya dengan membaca kembali isi cerita.
-      </p>
-
-      <div class="example">
-        <strong>Pertanyaan:</strong><br>
-        Di mana masyarakat Desa Sukamaju melakukan kegiatan jual beli?
-
-        <br><br>
-
-        <strong>Jawaban:</strong><br>
-        Di pasar desa.
+      <div class="info-box">
+        <div class="icon">🔗</div>
+        <h3>Menghubungkan Data</h3>
+        <p>Cerita dapat dihubungkan dengan piktogram untuk memahami jumlah barang dagangan.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="card">
-      <h2>🧠 Menemukan Informasi Tersirat</h2>
+  <section class="card">
+    <h2>📊 Cara Membaca Piktogram</h2>
+    <div class="steps">
+      <div class="step">Baca judul atau konteks data yang ditampilkan.</div>
+      <div class="step">Perhatikan keterangan nilai setiap simbol.</div>
+      <div class="step">Hitung banyak simbol pada setiap kategori.</div>
+      <div class="step">Hubungkan data dengan informasi dalam cerita.</div>
+      <div class="step">Gunakan informasi tersebut untuk membuat kesimpulan.</div>
+    </div>
+  </section>
 
-      <p>
-        Informasi tersirat tidak selalu ditulis secara langsung.
-        Kita perlu memahami hubungan antar informasi dalam teks.
-      </p>
+  <section class="card" id="latihan">
+    <h2>✏️ Latihan Literasi</h2>
+    <p class="subtitle">
+      Jawablah secara lisan atau tuliskan jawabanmu. Gunakan cerita dan piktogram di atas sebagai sumber informasi.
+    </p>
+    <div class="exercise-list">
+      <div class="exercise"><strong>1.</strong> Apa ide pokok cerita Pasar Desa Sukamaju?</div>
+      <div class="exercise"><strong>2.</strong> Siapa yang menjual cabai di pasar?</div>
+      <div class="exercise"><strong>3.</strong> Mengapa pembeli datang ke pasar?</div>
+      <div class="exercise"><strong>4.</strong> Apa hubungan antara pedagang dan pembeli dalam kegiatan ekonomi?</div>
+      <div class="exercise"><strong>5.</strong> Kesimpulan apa yang dapat kamu buat tentang fungsi pasar bagi masyarakat?</div>
+    </div>
+  </section>
 
-      <div class="example">
-        <strong>Informasi:</strong><br>
-        Petani menjual hasil pertanian kepada masyarakat.
-
-        <br><br>
-
-        <strong>Kesimpulan:</strong><br>
-        Petani memperoleh penghasilan dari kegiatan jual beli tersebut.
+  <!-- ======================================================
+       VIDEO INTERAKTIF - DILETAKKAN DI BAWAH LATIHAN LITERASI
+  ======================================================= -->
+  <section class="card video-section" id="videoInteraktif">
+    <div class="video-title-row">
+      <div class="video-title-icon">▶</div>
+      <div>
+        <h2 style="margin:0">Video Literasi IPS Interaktif</h2>
+        <p class="subtitle" style="margin:4px 0 0">
+          Materi Kegiatan Ekonomi: produksi, distribusi, konsumsi, dan jual beli.
+        </p>
       </div>
-    </section>
-
-    <section class="card">
-      <h2>📊 Membaca Piktogram</h2>
-
-      <p>
-        Piktogram adalah penyajian data menggunakan gambar atau simbol.
-        Setiap gambar memiliki nilai tertentu.
-      </p>
-
-      <div class="highlight">
-        Jika 1 gambar 🧺 = 2 keranjang,
-        maka kita harus mengalikan jumlah gambar dengan 2.
-      </div>
-
-      <table class="pictogram-table">
-        <thead>
-          <tr>
-            <th>Pedagang</th>
-            <th>Barang</th>
-            <th>Piktogram</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>Bu Sari</td>
-            <td>Tomat</td>
-            <td class="icons">🧺 🧺 🧺 🧺</td>
-          </tr>
-
-          <tr>
-            <td>Pak Budi</td>
-            <td>Jagung</td>
-            <td class="icons">🧺 🧺 🧺</td>
-          </tr>
-
-          <tr>
-            <td>Pak Hasan</td>
-            <td>Cabai</td>
-            <td class="icons">🧺 🧺 🧺 🧺 🧺</td>
-          </tr>
-
-          <tr>
-            <td>Bu Rina</td>
-            <td>Singkong</td>
-            <td class="icons">🧺 🧺</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="card">
-      <h2>👀 Cara Membaca Piktogram</h2>
-
-      <p>
-        Perhatikan tiga hal utama ketika membaca piktogram:
-      </p>
-
-      <ul>
-        <li>Perhatikan judul data.</li>
-        <li>Perhatikan gambar yang digunakan.</li>
-        <li>Perhatikan keterangan atau legenda.</li>
-      </ul>
-
-      <div class="example">
-        Bu Sari memiliki 4 gambar 🧺.<br>
-        Setiap gambar mewakili 2 keranjang.<br><br>
-
-        Maka:<br>
-        <strong>4 × 2 = 8 keranjang.</strong>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>🧩 Menghubungkan Cerita dan Data</h2>
-
-      <p>
-        Literasi yang baik berarti tidak hanya membaca cerita,
-        tetapi juga menghubungkan cerita dengan tabel atau piktogram.
-      </p>
-
-      <div class="question-box">
-        Jika cerita mengatakan bahwa cabai paling banyak tersedia di pasar,
-        kita harus memeriksa piktogram untuk memastikan apakah informasi tersebut benar.
-      </div>
-
-      <p style="margin-top:15px;">
-        Pada piktogram, Pak Hasan membawa cabai dengan 5 simbol.
-        Jumlah tersebut paling banyak dibandingkan pedagang lain.
-        Jadi informasi tersebut sesuai dengan data.
-      </p>
-    </section>
-
-    <section class="card">
-      <h2>🧠 Membuat Kesimpulan</h2>
-
-      <p>
-        Kesimpulan dibuat berdasarkan informasi yang telah dibaca dan dibandingkan.
-      </p>
-
-      <div class="example">
-        Berdasarkan data pasar Desa Sukamaju,
-        cabai merupakan hasil pertanian yang jumlahnya paling banyak,
-        sedangkan singkong jumlahnya paling sedikit.
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>🎯 Latihan Literasi</h2>
-
-      <div class="question-box">
-        <strong>Latihan 1</strong><br>
-        Apa kegiatan ekonomi yang dilakukan masyarakat Desa Sukamaju?
-      </div>
-
-      <div class="question-box">
-        <strong>Latihan 2</strong><br>
-        Siapa yang membawa hasil pertanian paling banyak?
-      </div>
-
-      <div class="question-box">
-        <strong>Latihan 3</strong><br>
-        Mengapa pasar penting bagi petani?
-      </div>
-
-      <div class="question-box">
-        <strong>Latihan 4</strong><br>
-        Apa hubungan antara petani dan pembeli dalam kegiatan pasar?
-      </div>
-
-      <div class="question-box">
-        <strong>Latihan 5</strong><br>
-        Tuliskan satu kesimpulan yang dapat kamu buat berdasarkan cerita dan piktogram.
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>🌱 Pesan Penting</h2>
-
-      <div class="info">
-        Murid yang memiliki kemampuan literasi yang baik
-        mampu membaca informasi, memahami isi informasi,
-        membandingkan data, dan menggunakan informasi
-        untuk memecahkan masalah dalam kehidupan sehari-hari.
-      </div>
-
-      <div class="btn-row">
-        <a href="index.html" class="btn btn-primary">
-          🏠 Kembali ke Beranda
-        </a>
-
-        <a href="numerasi.html" class="btn btn-warning">
-          ➡️ Lanjut ke Numerasi
-        </a>
-      </div>
-    </section>
-
-    <div class="footer">
-      PIKTO-IPS • Literasi IPS Sekolah Dasar
     </div>
 
+    <div class="video-intro">
+      <strong>📌 Aturan belajar:</strong> setiap video harus ditonton sampai selesai.
+      Setelah video selesai akan muncul pertanyaan <strong>“Apakah kamu paham?”</strong>.
+      Jika memilih <strong>Ya</strong>, video diputar ulang dalam mode interaktif dan akan berhenti
+      sebanyak <strong>4 kali</strong> untuk memberikan pertanyaan. Jawaban benar membuat video
+      lanjut; jawaban salah membuat video kembali dari awal.
+    </div>
+
+    <div class="video-grid">
+
+      <!-- VIDEO 1 -->
+      <article class="video-card" data-video-index="0">
+        <div class="video-card-head">
+          <div>
+            <h3>🎬 Video 1 — Kegiatan Ekonomi</h3>
+            <div class="video-source">Produksi • Distribusi • Konsumsi</div>
+          </div>
+          <span class="watch-status" id="status-video-0">BELUM DITONTON</span>
+        </div>
+
+        <div class="player-shell">
+          <div id="player-0" class="yt-player"></div>
+          <div class="player-lock" id="lock-0">
+            <div class="player-lock-inner">
+              <div class="play-icon">▶️</div>
+              <h4>Siap menonton?</h4>
+              <p>Tonton video sampai selesai. Kontrol melompat durasi dinonaktifkan agar pembelajaran utuh.</p>
+              <button class="btn btn-blue" type="button" onclick="startRequiredVideo(0)">Mulai Menonton</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-label">
+            <span>Progres menonton</span>
+            <span id="watch-percent-0">0%</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="watch-progress-0"></div></div>
+        </div>
+
+        <div class="storyline">
+          <h4>📖 Alur cerita video</h4>
+          <ol>
+            <li>Murid dikenalkan pada kegiatan ekonomi yang terjadi dalam kehidupan sehari-hari.</li>
+            <li>Dijelaskan kegiatan <strong>produksi</strong>, yaitu menghasilkan barang atau jasa.</li>
+            <li>Dijelaskan kegiatan <strong>distribusi</strong>, yaitu menyalurkan barang dari produsen kepada konsumen.</li>
+            <li>Dijelaskan kegiatan <strong>konsumsi</strong>, yaitu menggunakan barang atau jasa untuk memenuhi kebutuhan.</li>
+            <li>Ketiga kegiatan dihubungkan dengan contoh kehidupan masyarakat dan aktivitas jual beli.</li>
+          </ol>
+        </div>
+
+        <div class="understanding hidden" id="understanding-0">
+          <h4>🤔 Apakah kamu paham?</h4>
+          <p>Pilih Ya untuk mengikuti video interaktif. Pilih Tidak untuk menonton ulang dari awal.</p>
+          <div class="btn-row">
+            <button class="btn btn-green" type="button" onclick="confirmUnderstand(0,true)">✅ Ya, saya paham</button>
+            <button class="btn btn-red" type="button" onclick="confirmUnderstand(0,false)">🔁 Belum, tonton lagi</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- VIDEO 2 -->
+      <article class="video-card" data-video-index="1">
+        <div class="video-card-head">
+          <div>
+            <h3>🎬 Video 2 — Kegiatan Ekonomi di Indonesia</h3>
+            <div class="video-source">Produksi • Distribusi • Konsumsi dalam masyarakat</div>
+          </div>
+          <span class="watch-status" id="status-video-1">BELUM DITONTON</span>
+        </div>
+
+        <div class="player-shell">
+          <div id="player-1" class="yt-player"></div>
+          <div class="player-lock" id="lock-1">
+            <div class="player-lock-inner">
+              <div class="play-icon">▶️</div>
+              <h4>Siap menonton?</h4>
+              <p>Perhatikan hubungan antara orang yang menghasilkan, menyalurkan, dan menggunakan barang.</p>
+              <button class="btn btn-blue" type="button" onclick="startRequiredVideo(1)">Mulai Menonton</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-label">
+            <span>Progres menonton</span>
+            <span id="watch-percent-1">0%</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="watch-progress-1"></div></div>
+        </div>
+
+        <div class="storyline">
+          <h4>📖 Alur cerita video</h4>
+          <ol>
+            <li>Video mengajak murid melihat kegiatan ekonomi yang ada di lingkungan masyarakat.</li>
+            <li>Murid mengenali peran <strong>produsen</strong> sebagai pihak yang menghasilkan barang.</li>
+            <li>Murid memahami peran <strong>distributor</strong> sebagai pihak yang menyalurkan barang.</li>
+            <li>Murid memahami peran <strong>konsumen</strong> sebagai pihak yang menggunakan atau membeli barang.</li>
+            <li>Alur tersebut dikaitkan dengan pasar dan proses jual beli untuk memenuhi kebutuhan manusia.</li>
+          </ol>
+        </div>
+
+        <div class="understanding hidden" id="understanding-1">
+          <h4>🤔 Apakah kamu paham?</h4>
+          <p>Pilih Ya untuk mengikuti video interaktif. Pilih Tidak untuk menonton ulang dari awal.</p>
+          <div class="btn-row">
+            <button class="btn btn-green" type="button" onclick="confirmUnderstand(1,true)">✅ Ya, saya paham</button>
+            <button class="btn btn-red" type="button" onclick="confirmUnderstand(1,false)">🔁 Belum, tonton lagi</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="video-complete">
+      <strong>🏁 Status Penyelesaian Video</strong>
+      <p id="videoSummary">Selesaikan kedua video dan 4 pertanyaan interaktif pada masing-masing video.</p>
+      <div class="complete-bar"><div class="complete-fill" id="completeFill"></div></div>
+    </div>
+
+    <div class="next-lock">
+      <p id="nextMessage">🔒 Materi Numerasi terbuka setelah kedua video interaktif selesai.</p>
+      <a id="nextNumerasi" class="btn btn-light" href="javascript:void(0)" aria-disabled="true">🔢 Lanjut ke Numerasi</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>💡 Pesan Penting</h2>
+    <p class="subtitle" style="margin-bottom:0">
+      Murid yang memiliki kemampuan literasi yang baik tidak hanya membaca,
+      tetapi juga memahami informasi, memeriksa bukti, menghubungkan data,
+      dan membuat kesimpulan yang masuk akal.
+    </p>
+  </section>
+
+  <div class="btn-row" style="margin-top:20px">
+    <a class="btn btn-light" href="index.html">← Kembali ke Beranda</a>
+    <a class="btn btn-blue" href="#videoInteraktif">🎬 Ke Video Interaktif</a>
   </div>
 
+  <footer>
+    <strong>PIKTO-IPS</strong><br>
+    Media Pembelajaran IPS Berbasis Literasi, Numerasi, Piktogram, dan Video Interaktif
+  </footer>
+</main>
+
+<!-- POPUP VIDEO INTERAKTIF -->
+<div class="modal hidden" id="interactiveModal" role="dialog" aria-modal="true" aria-labelledby="interactiveTitle">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h3 id="interactiveTitle">🎬 Video Interaktif</h3>
+        <p id="interactiveSubtitle">Video akan berhenti 4 kali untuk memberikan pertanyaan.</p>
+      </div>
+      <button class="close-btn" type="button" onclick="closeInteractiveModal()" aria-label="Tutup">✕</button>
+    </div>
+
+    <div class="interactive-player-wrap">
+      <div id="interactivePlayer"></div>
+
+      <div class="question-overlay hidden" id="questionOverlay">
+        <div class="question-card">
+          <span class="question-number" id="questionNumber">PERTANYAAN 1 DARI 4</span>
+          <h4 id="questionText">Pertanyaan</h4>
+          <div class="quiz-options" id="quizOptions"></div>
+          <div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="interactive-status">
+      <span id="interactiveCheckpoint">Checkpoint: 0/4</span>
+      <span id="interactiveRule">✅ Benar = lanjut • ❌ Salah = kembali ke awal</span>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  const VIDEO_DATA = [
+    {
+      id: 'yA1Ftjg0JKI',
+      title: 'Video 1 — Kegiatan Ekonomi',
+      questions: [
+        {
+          q: 'Kegiatan menghasilkan barang atau jasa disebut ...',
+          options: ['Konsumsi','Distribusi','Produksi','Promosi'],
+          answer: 2
+        },
+        {
+          q: 'Orang yang menyalurkan barang dari produsen menuju konsumen berperan dalam kegiatan ...',
+          options: ['Distribusi','Produksi','Konsumsi','Menabung'],
+          answer: 0
+        },
+        {
+          q: 'Membeli sayur di pasar untuk dimasak di rumah termasuk kegiatan ...',
+          options: ['Produksi','Konsumsi','Distribusi','Ekspor'],
+          answer: 1
+        },
+        {
+          q: 'Urutan kegiatan ekonomi yang paling tepat adalah ...',
+          options: [
+            'Konsumsi → Produksi → Distribusi',
+            'Distribusi → Konsumsi → Produksi',
+            'Produksi → Distribusi → Konsumsi',
+            'Produksi → Konsumsi → Distribusi'
+          ],
+          answer: 2
+        }
+      ]
+    },
+    {
+      id: 'C2S7OhHM31Y',
+      title: 'Video 2 — Kegiatan Ekonomi di Indonesia',
+      questions: [
+        {
+          q: 'Petani yang menanam dan memanen sayur termasuk ...',
+          options: ['Konsumen','Distributor','Produsen','Pembeli'],
+          answer: 2
+        },
+        {
+          q: 'Pedagang yang membawa hasil panen ke pasar membantu proses ...',
+          options: ['Distribusi','Konsumsi','Produksi','Menabung'],
+          answer: 0
+        },
+        {
+          q: 'Mengapa masyarakat melakukan kegiatan ekonomi?',
+          options: [
+            'Untuk memenuhi kebutuhan hidup',
+            'Agar semua barang disimpan',
+            'Agar tidak ada jual beli',
+            'Untuk mengurangi pekerjaan'
+          ],
+          answer: 0
+        },
+        {
+          q: 'Dalam kegiatan jual beli di pasar, pembeli biasanya berperan sebagai ...',
+          options: ['Produsen','Konsumen','Distributor','Pengangkut'],
+          answer: 1
+        }
+      ]
+    }
+  ];
+
+  const requiredPlayers = [];
+  const requiredState = VIDEO_DATA.map(() => ({
+    ready:false,
+    started:false,
+    ended:false,
+    interactiveDone:false,
+    maxTime:0,
+    monitor:null
+  }));
+
+  let interactivePlayer = null;
+  let interactiveReady = false;
+  let activeVideoIndex = null;
+  let currentCheckpoint = 0;
+  let checkpoints = [];
+  let interactiveMonitor = null;
+  let questionShowing = false;
+  let restartingFromWrong = false;
+
+  function onYouTubeIframeAPIReady(){
+    VIDEO_DATA.forEach((video,index)=>{
+      requiredPlayers[index] = new YT.Player('player-' + index,{
+        videoId:video.id,
+        playerVars:{
+          controls:0,
+          disablekb:1,
+          rel:0,
+          modestbranding:1,
+          playsinline:1,
+          fs:0,
+          iv_load_policy:3
+        },
+        events:{
+          onReady:()=>{ requiredState[index].ready = true; },
+          onStateChange:(event)=>handleRequiredState(index,event)
+        }
+      });
+    });
+
+    interactivePlayer = new YT.Player('interactivePlayer',{
+      height:'100%',
+      width:'100%',
+      videoId:VIDEO_DATA[0].id,
+      playerVars:{
+        controls:0,
+        disablekb:1,
+        rel:0,
+        modestbranding:1,
+        playsinline:1,
+        fs:0,
+        iv_load_policy:3
+      },
+      events:{
+        onReady:()=>{ interactiveReady = true; },
+        onStateChange:handleInteractiveState
+      }
+    });
+
+    restoreCompletionState();
+  }
+
+  function startRequiredVideo(index){
+    const player = requiredPlayers[index];
+    const state = requiredState[index];
+    if(!player || !state.ready){
+      alert('Pemutar video masih disiapkan. Tunggu sebentar lalu coba lagi.');
+      return;
+    }
+
+    state.started = true;
+    state.ended = false;
+    document.getElementById('lock-' + index).classList.add('hidden');
+    document.getElementById('understanding-' + index).classList.add('hidden');
+
+    player.seekTo(0,true);
+    player.playVideo();
+    startRequiredMonitor(index);
+  }
+
+  function startRequiredMonitor(index){
+    clearInterval(requiredState[index].monitor);
+
+    requiredState[index].monitor = setInterval(()=>{
+      const player = requiredPlayers[index];
+      if(!player || typeof player.getDuration !== 'function') return;
+
+      const duration = Number(player.getDuration() || 0);
+      const current = Number(player.getCurrentTime() || 0);
+
+      if(duration > 0){
+        requiredState[index].maxTime = Math.max(requiredState[index].maxTime,current);
+        const percent = Math.min(100,Math.round((current/duration)*100));
+        updateWatchProgress(index,percent);
+      }
+    },500);
+  }
+
+  function handleRequiredState(index,event){
+    if(event.data === YT.PlayerState.ENDED){
+      clearInterval(requiredState[index].monitor);
+      requiredState[index].ended = true;
+      updateWatchProgress(index,100);
+
+      const status = document.getElementById('status-video-' + index);
+      status.textContent = 'SUDAH DITONTON';
+      status.classList.add('done');
+
+      document.getElementById('understanding-' + index).classList.remove('hidden');
+      document.getElementById('understanding-' + index).scrollIntoView({behavior:'smooth',block:'center'});
+    }
+  }
+
+  function updateWatchProgress(index,percent){
+    document.getElementById('watch-percent-' + index).textContent = percent + '%';
+    document.getElementById('watch-progress-' + index).style.width = percent + '%';
+  }
+
+  function confirmUnderstand(index,understands){
+    if(!requiredState[index].ended){
+      alert('Video harus ditonton sampai selesai terlebih dahulu.');
+      return;
+    }
+
+    if(!understands){
+      document.getElementById('understanding-' + index).classList.add('hidden');
+      requiredState[index].ended = false;
+      startRequiredVideo(index);
+      return;
+    }
+
+    openInteractiveModal(index);
+  }
+
+  function openInteractiveModal(index){
+    if(!interactiveReady){
+      alert('Pemutar video interaktif masih disiapkan. Tunggu sebentar lalu coba lagi.');
+      return;
+    }
+
+    activeVideoIndex = index;
+    currentCheckpoint = 0;
+    questionShowing = false;
+    restartingFromWrong = false;
+
+    const modal = document.getElementById('interactiveModal');
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    document.getElementById('interactiveTitle').textContent =
+      '🎬 ' + VIDEO_DATA[index].title + ' — Mode Interaktif';
+    document.getElementById('interactiveCheckpoint').textContent = 'Checkpoint: 0/4';
+    document.getElementById('questionOverlay').classList.add('hidden');
+    document.getElementById('quizFeedback').textContent = '';
+
+    interactivePlayer.loadVideoById(VIDEO_DATA[index].id);
+
+    setTimeout(()=>{
+      const duration = Number(interactivePlayer.getDuration() || 0);
+      makeCheckpoints(duration);
+      interactivePlayer.seekTo(0,true);
+      interactivePlayer.playVideo();
+      startInteractiveMonitor();
+    },900);
+  }
+
+  function makeCheckpoints(duration){
+    const safeDuration = duration > 20 ? duration : 120;
+    checkpoints = [
+      Math.max(5,safeDuration * .20),
+      Math.max(10,safeDuration * .40),
+      Math.max(15,safeDuration * .60),
+      Math.max(20,safeDuration * .80)
+    ];
+  }
+
+  function startInteractiveMonitor(){
+    clearInterval(interactiveMonitor);
+
+    interactiveMonitor = setInterval(()=>{
+      if(activeVideoIndex === null || questionShowing || !interactivePlayer) return;
+
+      const duration = Number(interactivePlayer.getDuration() || 0);
+      if(duration > 0 && (!checkpoints.length || checkpoints[3] > duration)){
+        makeCheckpoints(duration);
+      }
+
+      const current = Number(interactivePlayer.getCurrentTime() || 0);
+      const checkpoint = checkpoints[currentCheckpoint];
+
+      if(currentCheckpoint < 4 && checkpoint && current >= checkpoint){
+        pauseForQuestion();
+      }
+    },250);
+  }
+
+  function handleInteractiveState(event){
+    if(event.data === YT.PlayerState.ENDED && activeVideoIndex !== null){
+      if(currentCheckpoint >= 4){
+        finishInteractiveVideo();
+      }
+    }
+  }
+
+  function pauseForQuestion(){
+    if(questionShowing || currentCheckpoint >= 4) return;
+
+    questionShowing = true;
+    interactivePlayer.pauseVideo();
+
+    const question = VIDEO_DATA[activeVideoIndex].questions[currentCheckpoint];
+    document.getElementById('questionNumber').textContent =
+      'PERTANYAAN ' + (currentCheckpoint + 1) + ' DARI 4';
+    document.getElementById('questionText').textContent = question.q;
+    document.getElementById('quizFeedback').textContent = '';
+    document.getElementById('quizFeedback').className = 'quiz-feedback';
+
+    const options = document.getElementById('quizOptions');
+    options.innerHTML = '';
+
+    question.options.forEach((option,optIndex)=>{
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'quiz-option';
+      btn.textContent = String.fromCharCode(65 + optIndex) + '. ' + option;
+      btn.addEventListener('click',()=>answerInteractiveQuestion(optIndex));
+      options.appendChild(btn);
+    });
+
+    document.getElementById('questionOverlay').classList.remove('hidden');
+  }
+
+  function answerInteractiveQuestion(selected){
+    const question = VIDEO_DATA[activeVideoIndex].questions[currentCheckpoint];
+    const feedback = document.getElementById('quizFeedback');
+    const buttons = [...document.querySelectorAll('#quizOptions .quiz-option')];
+    buttons.forEach(btn=>btn.disabled = true);
+
+    if(selected === question.answer){
+      feedback.textContent = '✅ Benar! Video akan dilanjutkan.';
+      feedback.className = 'quiz-feedback feedback-ok';
+
+      setTimeout(()=>{
+        currentCheckpoint++;
+        document.getElementById('interactiveCheckpoint').textContent =
+          'Checkpoint: ' + currentCheckpoint + '/4';
+        document.getElementById('questionOverlay').classList.add('hidden');
+        questionShowing = false;
+        interactivePlayer.playVideo();
+      },850);
+    }else{
+      feedback.textContent = '❌ Jawaban belum tepat. Sesuai aturan, video diputar kembali dari awal.';
+      feedback.className = 'quiz-feedback feedback-bad';
+
+      setTimeout(()=>{
+        currentCheckpoint = 0;
+        document.getElementById('interactiveCheckpoint').textContent = 'Checkpoint: 0/4';
+        document.getElementById('questionOverlay').classList.add('hidden');
+        questionShowing = false;
+        restartingFromWrong = true;
+        interactivePlayer.seekTo(0,true);
+        interactivePlayer.playVideo();
+
+        setTimeout(()=>{ restartingFromWrong = false; },900);
+      },1300);
+    }
+  }
+
+  function finishInteractiveVideo(){
+    clearInterval(interactiveMonitor);
+
+    const index = activeVideoIndex;
+    requiredState[index].interactiveDone = true;
+    localStorage.setItem('pikto_literasi_video_' + index + '_done','1');
+
+    const status = document.getElementById('status-video-' + index);
+    status.textContent = 'SELESAI ✅';
+    status.classList.add('done');
+
+    updateOverallCompletion();
+
+    setTimeout(()=>{
+      alert('🎉 Hebat! Kamu telah menyelesaikan video interaktif dan 4 pertanyaan.');
+      closeInteractiveModal();
+    },300);
+  }
+
+  function closeInteractiveModal(){
+    clearInterval(interactiveMonitor);
+    if(interactivePlayer && typeof interactivePlayer.pauseVideo === 'function'){
+      interactivePlayer.pauseVideo();
+    }
+    document.getElementById('interactiveModal').classList.add('hidden');
+    document.getElementById('questionOverlay').classList.add('hidden');
+    document.body.style.overflow = '';
+    activeVideoIndex = null;
+    questionShowing = false;
+  }
+
+  function restoreCompletionState(){
+    VIDEO_DATA.forEach((_,index)=>{
+      const done = localStorage.getItem('pikto_literasi_video_' + index + '_done') === '1';
+      if(done){
+        requiredState[index].ended = true;
+        requiredState[index].interactiveDone = true;
+        updateWatchProgress(index,100);
+        const status = document.getElementById('status-video-' + index);
+        status.textContent = 'SELESAI ✅';
+        status.classList.add('done');
+        document.getElementById('understanding-' + index).classList.remove('hidden');
+      }
+    });
+
+    updateOverallCompletion();
+  }
+
+  function updateOverallCompletion(){
+    const completed = requiredState.filter(item=>item.interactiveDone).length;
+    const percent = Math.round((completed / VIDEO_DATA.length) * 100);
+
+    document.getElementById('completeFill').style.width = percent + '%';
+    document.getElementById('videoSummary').textContent =
+      completed + ' dari ' + VIDEO_DATA.length + ' video interaktif telah selesai.';
+
+    const link = document.getElementById('nextNumerasi');
+    const message = document.getElementById('nextMessage');
+
+    if(completed === VIDEO_DATA.length){
+      link.href = 'numerasi.html';
+      link.className = 'btn btn-green';
+      link.setAttribute('aria-disabled','false');
+      link.textContent = '✅ Lanjut ke Materi Numerasi';
+      message.textContent = '🎉 Semua video selesai. Kamu sudah boleh melanjutkan ke materi Numerasi.';
+    }else{
+      link.href = 'javascript:void(0)';
+      link.className = 'btn btn-light';
+      link.setAttribute('aria-disabled','true');
+      link.textContent = '🔒 Lanjut ke Numerasi';
+      message.textContent = '🔒 Selesaikan kedua video interaktif terlebih dahulu.';
+    }
+  }
+
+  document.getElementById('nextNumerasi').addEventListener('click',function(event){
+    const completed = requiredState.filter(item=>item.interactiveDone).length;
+    if(completed !== VIDEO_DATA.length){
+      event.preventDefault();
+      alert('Selesaikan kedua video interaktif terlebih dahulu.');
+    }
+  });
+
+  document.getElementById('interactiveModal').addEventListener('click',function(event){
+    if(event.target === this){
+      closeInteractiveModal();
+    }
+  });
+</script>
 </body>
 </html>
